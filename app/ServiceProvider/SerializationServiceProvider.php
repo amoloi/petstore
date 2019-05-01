@@ -22,6 +22,7 @@ use Chubbyphp\ApiHttp\Serialization\ApiProblem\ClientError\UnsupportedMediaTypeM
 use Chubbyphp\Serialization\Mapping\CallableNormalizationObjectMapping;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
+use Zend\Expressive\Router\FastRouteRouter;
 
 final class SerializationServiceProvider implements ServiceProviderInterface
 {
@@ -34,8 +35,8 @@ final class SerializationServiceProvider implements ServiceProviderInterface
             BadRequest::class => new MappingConfig(BadRequestMapping::class),
             NotAcceptable::class => new MappingConfig(NotAcceptableMapping::class),
             NotFound::class => new MappingConfig(NotFoundMapping::class),
-            Pet::class => new MappingConfig(PetMapping::class, ['router']),
-            PetCollection::class => new MappingConfig(PetCollectionMapping::class, ['router']),
+            Pet::class => new MappingConfig(PetMapping::class, [FastRouteRouter::class]),
+            PetCollection::class => new MappingConfig(PetCollectionMapping::class, [FastRouteRouter::class]),
             UnprocessableEntity::class => new MappingConfig(UnprocessableEntityMapping::class),
             UnsupportedMediaType::class => new MappingConfig(UnsupportedMediaTypeMapping::class),
         ];

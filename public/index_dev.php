@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-/** @var Slim\App $app */
+/** @var Zend\Expressive\Application $app */
 
 $env = 'dev';
 

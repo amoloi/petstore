@@ -10,7 +10,7 @@
 
 ## Description
 
-A simple skeleton to build api's based on the [slimframework][1].
+A simple skeleton to build api's based on the [zend-expressive][1].
 
 ## Requirements
 
@@ -19,17 +19,18 @@ A simple skeleton to build api's based on the [slimframework][1].
  * [chubbyphp/chubbyphp-config][4]: ^1.1.2
  * [chubbyphp/chubbyphp-deserialization][5]: ^2.7.4
  * [chubbyphp/chubbyphp-doctrine-db-service-provider][6]: ^1.2.1
- * [chubbyphp/chubbyphp-lazy-middleware][7]: ^1.1.0
- * [chubbyphp/chubbyphp-negotiation][8]: ^1.2.4
- * [chubbyphp/chubbyphp-serialization][9]: ^2.7.0
- * [chubbyphp/chubbyphp-slim-psr15][10]: ^1.0.0
- * [chubbyphp/chubbyphp-validation][11]: ^3.3.0
- * [doctrine/orm][12]: ^2.6.3
- * [ocramius/proxy-manager][13]: ^2.1.1
- * [ramsey/uuid][14]: ^3.8.0
- * [slim/slim][15]: ^3.11.0
- * [swagger-api/swagger-ui][16]: ^3.20.4
- * [symfony/console][17]: ^4.2.1
+ * [chubbyphp/chubbyphp-negotiation][7]: ^1.2.4
+ * [chubbyphp/chubbyphp-serialization][8]: ^2.7.0
+ * [chubbyphp/chubbyphp-validation][9]: ^3.3.0
+ * [doctrine/orm][10]: ^2.6.3
+ * [ocramius/proxy-manager][11]: ^2.1.1
+ * [pimple/pimple][12]: ^3.2.3
+ * [ramsey/uuid][13]: ^3.8.0
+ * [swagger-api/swagger-ui][14]: ^3.22.1
+ * [symfony/console][15]: ^4.2.1
+ * [zendframework/zend-diactoros][16]: ^2.1.2
+ * [zendframework/zend-expressive-fastroute][17]: ^3.02
+ * [zendframework/zend-expressive][18]: ^3.0.1
 
 ## Environment
 
@@ -90,7 +91,6 @@ bin/console orm:schema-tool:update --dump-sql --force
 #### Factory
 
  * [App\ApiHttp\Factory\InvalidParametersFactory][50]
- * [App\ApiHttp\Factory\ResponseFactory][51]
 
 ### Collection
 
@@ -104,20 +104,21 @@ bin/console orm:schema-tool:update --dump-sql --force
 
 ### Controller
 
- * [App\Controller\PingController][80]
+ * [App\Controller\IndexController][80]
+ * [App\Controller\PingController][81]
 
 #### Crud
 
- * [App\Controller\Crud\CreateController][81]
- * [App\Controller\Crud\DeleteController][82]
- * [App\Controller\Crud\ListController][83]
- * [App\Controller\Crud\ReadController][84]
- * [App\Controller\Crud\UpdateController][85]
+ * [App\Controller\Crud\CreateController][82]
+ * [App\Controller\Crud\DeleteController][83]
+ * [App\Controller\Crud\ListController][84]
+ * [App\Controller\Crud\ReadController][85]
+ * [App\Controller\Crud\UpdateController][86]
 
 #### Swagger
 
- * [App\Controller\Swagger\IndexController][86]
- * [App\Controller\Swagger\YamlController][87]
+ * [App\Controller\Swagger\IndexController][87]
+ * [App\Controller\Swagger\YamlController][88]
 
 ### Factory
 
@@ -182,34 +183,35 @@ bin/console orm:schema-tool:update --dump-sql --force
  * [App\ServiceProvider\RespositoryServiceProvider][169]
  * [App\ServiceProvider\SerializationServiceProvider][170]
  * [App\ServiceProvider\ValidationServiceProvider][171]
+ * [App\ServiceProvider\ZendExpressiveServiceProvider][172]
 
 ## Copyright
 
 Dominik Zogg 2018
 
-[1]: https://www.slimframework.com
+[1]: https://docs.zendframework.com/zend-expressive/
 [2]: https://github.com/vagrant-php/ubuntu
 
 [3]: https://packagist.org/packages/chubbyphp/chubbyphp-api-http
 [4]: https://packagist.org/packages/chubbyphp/chubbyphp-config
 [5]: https://packagist.org/packages/chubbyphp/chubbyphp-deserialization
 [6]: https://packagist.org/packages/chubbyphp/chubbyphp-doctrine-db-service-provider
-[7]: https://packagist.org/packages/chubbyphp/chubbyphp-lazy-middleware
-[8]: https://packagist.org/packages/chubbyphp/chubbyphp-negotiation
-[9]: https://packagist.org/packages/chubbyphp/chubbyphp-serialization
-[10]: https://packagist.org/packages/chubbyphp/chubbyphp-slim-psr15
-[11]: https://packagist.org/packages/chubbyphp/chubbyphp-validation
-[12]: https://packagist.org/packages/doctrine/orm
-[13]: https://packagist.org/packages/ocramius/proxy-manager
-[14]: https://packagist.org/packages/ramsey/uuid
-[15]: https://packagist.org/packages/slim/slim
-[16]: https://packagist.org/packages/swagger-api/swagger-ui
-[17]: https://packagist.org/packages/symfony/console
+[7]: https://packagist.org/packages/chubbyphp/chubbyphp-negotiation
+[8]: https://packagist.org/packages/chubbyphp/chubbyphp-serialization
+[9]: https://packagist.org/packages/chubbyphp/chubbyphp-validation
+[10]: https://packagist.org/packages/doctrine/orm
+[11]: https://packagist.org/packages/ocramius/proxy-manager
+[12]: https://packagist.org/packages/pimple/pimple
+[13]: https://packagist.org/packages/ramsey/uuid
+[14]: https://packagist.org/packages/swagger-api/swagger-ui
+[15]: https://packagist.org/packages/symfony/console
+[16]: https://packagist.org/packages/zend-diactoros
+[17]: https://packagist.org/packages/zendframework/zend-expressive-fastroute
+[18]: https://packagist.org/packages/zendframework/zend-expressive
 
 [40]: https://packagist.org/packages/chubbyphp/petstore
 
 [50]: app/ApiHttp/Factory/InvalidParametersFactory.php
-[51]: app/ApiHttp/Factory/ResponseFactory.php
 
 [60]: app/Collection/PetCollection.php
 
@@ -217,14 +219,15 @@ Dominik Zogg 2018
 [71]: app/Config/PhpunitConfig.php
 [72]: app/Config/ProdConfig.php
 
-[80]: app/Controller/PingController.php
-[81]: app/Controller/Crud/CreateController.php
-[82]: app/Controller/Crud/DeleteController.php
-[83]: app/Controller/Crud/ListController.php
-[84]: app/Controller/Crud/ReadController.php
-[85]: app/Controller/Crud/UpdateController.php
-[86]: app/Controller/Swagger/IndexController.php
-[87]: app/Controller/Swagger/YamlController.php
+[80]: app/Controller/IndexController.php
+[81]: app/Controller/PingController.php
+[82]: app/Controller/Crud/CreateController.php
+[83]: app/Controller/Crud/DeleteController.php
+[84]: app/Controller/Crud/ListController.php
+[85]: app/Controller/Crud/ReadController.php
+[86]: app/Controller/Crud/UpdateController.php
+[87]: app/Controller/Swagger/IndexController.php
+[88]: app/Controller/Swagger/YamlController.php
 
 [100]: app/Factory/Collection/PetCollectionFactory.php
 [101]: app/Factory/Model/PetFactory.php
@@ -257,3 +260,4 @@ Dominik Zogg 2018
 [169]: app/ServiceProvider/RespositoryServiceProvider.php
 [170]: app/ServiceProvider/SerializationServiceProvider.php
 [171]: app/ServiceProvider/ValidationServiceProvider.php
+[172]: app/ServiceProvider/ZendExpressiveServiceProvider.php

@@ -15,7 +15,7 @@ use Chubbyphp\Serialization\Normalizer\NormalizerContextInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ServerRequestInterface;
-use Slim\Interfaces\RouterInterface;
+use Zend\Expressive\Router\RouterInterface;
 
 /**
  * @covers \App\Mapping\Serialization\AbstractCollectionMapping
@@ -79,12 +79,12 @@ class CollectionMappingTest extends TestCase
     {
         /** @var RouterInterface|MockObject $router */
         $router = $this->getMockByCalls(RouterInterface::class, [
-            Call::create('pathFor')
-                ->with($this->getListRoute(), [], ['offset' => 0, 'limit' => 20])
-                ->willReturn(sprintf('%s?offset=0&limit=20', $this->getCollectionPath())),
-            Call::create('pathFor')
+            Call::create('generateUri')
+                ->with($this->getListRoute(), [], [])
+                ->willReturn($this->getCollectionPath()),
+            Call::create('generateUri')
                 ->with($this->getCreateRoute(), [], [])
-                ->willReturn(sprintf('%s', $this->getCollectionPath())),
+                ->willReturn($this->getCollectionPath()),
         ]);
 
         $mapping = $this->getCollectionMapping($router);

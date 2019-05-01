@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace App\ServiceProvider;
 
 use App\ApiHttp\Factory\InvalidParametersFactory;
-use App\ApiHttp\Factory\ResponseFactory;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
+use Zend\Diactoros\ResponseFactory;
+use Zend\Diactoros\StreamFactory;
 
 final class ApiHttpServiceProvider implements ServiceProviderInterface
 {
@@ -18,6 +19,10 @@ final class ApiHttpServiceProvider implements ServiceProviderInterface
     {
         $container['api-http.response.factory'] = function () {
             return new ResponseFactory();
+        };
+
+        $container['api-http.stream.factory'] = function () {
+            return new StreamFactory();
         };
 
         $container[InvalidParametersFactory::class] = function () {

@@ -8,7 +8,7 @@ use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Slim\Router;
+use Zend\Expressive\Router\RouterInterface;
 
 class IndexController implements RequestHandlerInterface
 {
@@ -18,17 +18,17 @@ class IndexController implements RequestHandlerInterface
     private $responseFactory;
 
     /**
-     * @var Router
+     * @var RouterInterface
      */
     private $router;
 
     /**
      * @param ResponseFactoryInterface $responseFactory
-     * @param routerInterface          $router
+     * @param RouterInterface          $router
      */
     public function __construct(
         ResponseFactoryInterface $responseFactory,
-        Router $router
+        RouterInterface $router
     ) {
         $this->responseFactory = $responseFactory;
         $this->router = $router;
@@ -42,6 +42,6 @@ class IndexController implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         return $this->responseFactory->createResponse(302)
-            ->withHeader('Location', $this->router->urlFor('swagger_index'));
+            ->withHeader('Location', $this->router->generateUri('swagger_index'));
     }
 }

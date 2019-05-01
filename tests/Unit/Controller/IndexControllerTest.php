@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Slim\Router;
+use Zend\Expressive\Router\RouterInterface;
 
 /**
  * @covers \App\Controller\IndexController
@@ -36,9 +36,9 @@ class IndexControllerTest extends TestCase
             Call::create('createResponse')->with(302, '')->willReturn($response),
         ]);
 
-        /** @var Router|MockObject $router */
-        $router = $this->getMockByCalls(Router::class, [
-            Call::create('urlFor')->with('swagger_index', [], [])->willReturn('https://petstore/api'),
+        /** @var RouterInterface|MockObject $router */
+        $router = $this->getMockByCalls(RouterInterface::class, [
+            Call::create('generateUri')->with('swagger_index', [], [])->willReturn('https://petstore/api'),
         ]);
 
         $controller = new IndexController($responseFactory, $router);

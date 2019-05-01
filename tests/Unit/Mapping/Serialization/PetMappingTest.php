@@ -10,7 +10,7 @@ use App\Model\Pet;
 use Chubbyphp\Mock\MockByCallsTrait;
 use Chubbyphp\Serialization\Mapping\NormalizationFieldMappingBuilder;
 use PHPUnit\Framework\MockObject\MockObject;
-use Slim\Interfaces\RouterInterface;
+use Zend\Expressive\Router\RouterInterface;
 
 /**
  * @covers \App\Mapping\Serialization\PetMapping

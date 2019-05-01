@@ -27,12 +27,12 @@ use Chubbyphp\ApiHttp\Manager\RequestManagerInterface;
 use Chubbyphp\ApiHttp\Manager\ResponseManagerInterface;
 use Chubbyphp\Mock\MockByCallsTrait;
 use Chubbyphp\Serialization\SerializerInterface;
-use Chubbyphp\SlimPsr15\RequestHandlerAdapter;
 use Chubbyphp\Validation\ValidatorInterface;
 use PHPUnit\Framework\TestCase;
 use Pimple\Container;
 use Psr\Http\Message\ResponseFactoryInterface;
-use Slim\Router;
+use Psr\Http\Message\StreamFactoryInterface;
+use Zend\Expressive\Router\FastRouteRouter;
 
 /**
  * @covers \App\ServiceProvider\ControllerServiceProvider
@@ -46,10 +46,11 @@ final class ControllerServiceProviderTest extends TestCase
         $container = new Container([
             'api-http.request.manager' => $this->getMockByCalls(RequestManagerInterface::class),
             'api-http.response.factory' => $this->getMockByCalls(ResponseFactoryInterface::class),
+            'api-http.stream.factory' => $this->getMockByCalls(StreamFactoryInterface::class),
             'api-http.response.manager' => $this->getMockByCalls(ResponseManagerInterface::class),
-            'router' => $this->getMockByCalls(Router::class),
             'serializer' => $this->getMockByCalls(SerializerInterface::class),
             'validator' => $this->getMockByCalls(ValidatorInterface::class),
+            FastRouteRouter::class => $this->getMockByCalls(FastRouteRouter::class),
             InvalidParametersFactory::class => $this->getMockByCalls(InvalidParametersFactoryInterface::class),
             PetCollectionFactory::class => $this->getMockByCalls(CollectionFactoryInterface::class),
             PetFactory::class => $this->getMockByCalls(ModelFactoryInterface::class),
@@ -71,30 +72,16 @@ final class ControllerServiceProviderTest extends TestCase
         self::assertArrayHasKey(IndexController::class, $container);
         self::assertArrayHasKey(PingController::class, $container);
 
-        self::assertRequestHandlerInstanceOf(ListController::class, $container[ListController::class.Pet::class]);
-        self::assertRequestHandlerInstanceOf(CreateController::class, $container[CreateController::class.Pet::class]);
-        self::assertRequestHandlerInstanceOf(ReadController::class, $container[ReadController::class.Pet::class]);
-        self::assertRequestHandlerInstanceOf(UpdateController::class, $container[UpdateController::class.Pet::class]);
-        self::assertRequestHandlerInstanceOf(DeleteController::class, $container[DeleteController::class.Pet::class]);
+        self::assertInstanceOf(ListController::class, $container[ListController::class.Pet::class]);
+        self::assertInstanceOf(CreateController::class, $container[CreateController::class.Pet::class]);
+        self::assertInstanceOf(ReadController::class, $container[ReadController::class.Pet::class]);
+        self::assertInstanceOf(UpdateController::class, $container[UpdateController::class.Pet::class]);
+        self::assertInstanceOf(DeleteController::class, $container[DeleteController::class.Pet::class]);
 
-        self::assertRequestHandlerInstanceOf(SwaggerIndexController::class, $container[SwaggerIndexController::class]);
-        self::assertRequestHandlerInstanceOf(SwaggerYamlController::class, $container[SwaggerYamlController::class]);
+        self::assertInstanceOf(SwaggerIndexController::class, $container[SwaggerIndexController::class]);
+        self::assertInstanceOf(SwaggerYamlController::class, $container[SwaggerYamlController::class]);
 
-        self::assertRequestHandlerInstanceOf(IndexController::class, $container[IndexController::class]);
-        self::assertRequestHandlerInstanceOf(PingController::class, $container[PingController::class]);
-    }
-
-    /**
-     * @param string                $expectedRequestHandlerClass
-     * @param RequestHandlerAdapter $adapter
-     */
-    private static function assertRequestHandlerInstanceOf(
-        string $expectedRequestHandlerClass,
-        RequestHandlerAdapter $adapter
-    ) {
-        $reflectionProperty = new \ReflectionProperty($adapter, 'requestHandler');
-        $reflectionProperty->setAccessible(true);
-
-        self::assertInstanceOf($expectedRequestHandlerClass, $reflectionProperty->getValue($adapter));
+        self::assertInstanceOf(IndexController::class, $container[IndexController::class]);
+        self::assertInstanceOf(PingController::class, $container[PingController::class]);
     }
 }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Config;
 
+use Zend\Expressive\Router\FastRouteRouter;
+
 class ProdConfig extends AbstractConfig
 {
     /**
@@ -11,8 +13,11 @@ class ProdConfig extends AbstractConfig
      */
     public function getConfig(): array
     {
+        $cacheDir = $this->getCacheDir();
+
         return [
             'config.cleanDirectories' => $this->getDirectories(),
+            'debug' => false,
             'doctrine.dbal.db.options' => [
                 'configuration' => [
                     'cache.result' => ['type' => 'apcu'],
@@ -31,19 +36,12 @@ class ProdConfig extends AbstractConfig
                 'cache.hydration' => ['type' => 'apcu'],
                 'cache.metadata' => ['type' => 'apcu'],
                 'cache.query' => ['type' => 'apcu'],
-                'proxies.dir' => $this->getCacheDir().'/doctrine/proxies',
+                'proxies.dir' => $cacheDir.'/doctrine/proxies',
             ],
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function getSlimSettings(): array
-    {
-        return [
-            'displayErrorDetails' => false,
-            'routerCacheFile' => $this->getCacheDir().'/routes.php',
+            'fastroute' => [
+                FastRouteRouter::CONFIG_CACHE_FILE => $cacheDir.'/routes.php',
+                FastRouteRouter::CONFIG_CACHE_ENABLED => true,
+            ],
         ];
     }
 
