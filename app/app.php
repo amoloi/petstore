@@ -53,7 +53,7 @@ $app->pipe(NotFoundHandler::class);
 
 $app->get('/', IndexController::class, 'index');
 $app->get('/api', SwaggerIndexController::class, 'swagger_index');
-$app->get('/api/swagger.yml', SwaggerYamlController::class, 'swagger_yml');
+$app->get('/api/swagger', SwaggerYamlController::class, 'swagger_yml');
 $app->get('/api/ping', [AcceptAndContentTypeMiddleware::class, PingController::class], 'ping');
 $app->get('/api/pets', [AcceptAndContentTypeMiddleware::class, ListController::class.Pet::class], 'pet_list');
 $app->post('/api/pets', [AcceptAndContentTypeMiddleware::class, CreateController::class.Pet::class], 'pet_create');
