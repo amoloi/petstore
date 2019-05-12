@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-/** @var Zend\Expressive\Application $app */
+/** @var Zend\Expressive\Application $web */
 
 $env = 'prod';
 
-$app = require __DIR__ . '/../app/app.php';
-$app->run();
+$web = require __DIR__ . '/../app/web.php';
+$web->run();

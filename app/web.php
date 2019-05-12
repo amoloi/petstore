@@ -38,27 +38,27 @@ $container->register(new ControllerServiceProvider());
 $container->register(new MiddlewareServiceProvider());
 $container->register(new ZendExpressiveServiceProvider());
 
-$app = new Application(
+$web = new Application(
     $container[MiddlewareFactory::class],
     $container[MiddlewarePipe::class],
     $container[RouteCollector::class],
     $container[RequestHandlerRunner::class]
 );
 
-$app->pipe(ErrorHandler::class);
-$app->pipe(RouteMiddleware::class);
-$app->pipe(MethodNotAllowedMiddleware::class);
-$app->pipe(DispatchMiddleware::class);
-$app->pipe(NotFoundHandler::class);
+$web->pipe(ErrorHandler::class);
+$web->pipe(RouteMiddleware::class);
+$web->pipe(MethodNotAllowedMiddleware::class);
+$web->pipe(DispatchMiddleware::class);
+$web->pipe(NotFoundHandler::class);
 
-$app->get('/', IndexController::class, 'index');
-$app->get('/api', SwaggerIndexController::class, 'swagger_index');
-$app->get('/api/swagger', SwaggerYamlController::class, 'swagger_yml');
-$app->get('/api/ping', [AcceptAndContentTypeMiddleware::class, PingController::class], 'ping');
-$app->get('/api/pets', [AcceptAndContentTypeMiddleware::class, ListController::class.Pet::class], 'pet_list');
-$app->post('/api/pets', [AcceptAndContentTypeMiddleware::class, CreateController::class.Pet::class], 'pet_create');
-$app->get('/api/pets/{id}', [AcceptAndContentTypeMiddleware::class, ReadController::class.Pet::class], 'pet_read');
-$app->put('/api/pets/{id}', [AcceptAndContentTypeMiddleware::class, UpdateController::class.Pet::class], 'pet_update');
-$app->delete('/api/pets/{id}', [AcceptAndContentTypeMiddleware::class, DeleteController::class.Pet::class], 'pet_delete');
+$web->get('/', IndexController::class, 'index');
+$web->get('/api', SwaggerIndexController::class, 'swagger_index');
+$web->get('/api/swagger', SwaggerYamlController::class, 'swagger_yml');
+$web->get('/api/ping', [AcceptAndContentTypeMiddleware::class, PingController::class], 'ping');
+$web->get('/api/pets', [AcceptAndContentTypeMiddleware::class, ListController::class.Pet::class], 'pet_list');
+$web->post('/api/pets', [AcceptAndContentTypeMiddleware::class, CreateController::class.Pet::class], 'pet_create');
+$web->get('/api/pets/{id}', [AcceptAndContentTypeMiddleware::class, ReadController::class.Pet::class], 'pet_read');
+$web->put('/api/pets/{id}', [AcceptAndContentTypeMiddleware::class, UpdateController::class.Pet::class], 'pet_update');
+$web->delete('/api/pets/{id}', [AcceptAndContentTypeMiddleware::class, DeleteController::class.Pet::class], 'pet_delete');
 
-return $app;
+return $web;
