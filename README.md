@@ -174,12 +174,13 @@ bin/console orm:schema-tool:update --dump-sql --force
  * [App\ServiceProvider\DoctrineServiceProvider][164]
  * [App\ServiceProvider\FactoryServiceProvider][165]
  * [App\ServiceProvider\MiddlewareServiceProvider][166]
- * [App\ServiceProvider\NegotiationServiceProvider][167]
- * [App\ServiceProvider\ProxyManagerServiceProvider][168]
- * [App\ServiceProvider\RespositoryServiceProvider][169]
- * [App\ServiceProvider\SerializationServiceProvider][170]
- * [App\ServiceProvider\ValidationServiceProvider][171]
- * [App\ServiceProvider\ZendExpressiveServiceProvider][172]
+ * [App\ServiceProvider\MonologServiceProvider][167]
+ * [App\ServiceProvider\NegotiationServiceProvider][168]
+ * [App\ServiceProvider\ProxyManagerServiceProvider][169]
+ * [App\ServiceProvider\RespositoryServiceProvider][170]
+ * [App\ServiceProvider\SerializationServiceProvider][171]
+ * [App\ServiceProvider\ValidationServiceProvider][172]
+ * [App\ServiceProvider\ZendExpressiveServiceProvider][173]
 
 ## Copyright
 
@@ -249,9 +250,10 @@ Dominik Zogg 2018
 [164]: app/ServiceProvider/DoctrineServiceProvider.php
 [165]: app/ServiceProvider/FactoryServiceProvider.php
 [166]: app/ServiceProvider/MiddlewareServiceProvider.php
-[167]: app/ServiceProvider/NegotiationServiceProvider.php
-[168]: app/ServiceProvider/ProxyManagerServiceProvider.php
-[169]: app/ServiceProvider/RespositoryServiceProvider.php
-[170]: app/ServiceProvider/SerializationServiceProvider.php
-[171]: app/ServiceProvider/ValidationServiceProvider.php
-[172]: app/ServiceProvider/ZendExpressiveServiceProvider.php
+[167]: app/ServiceProvider/MonologServiceProvider.php
+[168]: app/ServiceProvider/NegotiationServiceProvider.php
+[169]: app/ServiceProvider/ProxyManagerServiceProvider.php
+[170]: app/ServiceProvider/RespositoryServiceProvider.php
+[171]: app/ServiceProvider/SerializationServiceProvider.php
+[172]: app/ServiceProvider/ValidationServiceProvider.php
+[173]: app/ServiceProvider/ZendExpressiveServiceProvider.php
