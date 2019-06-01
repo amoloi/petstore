@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Config;
 
+use Monolog\Logger;
 use Zend\Expressive\Router\FastRouteRouter;
 
 class ProdConfig extends AbstractConfig
@@ -14,6 +15,7 @@ class ProdConfig extends AbstractConfig
     public function getConfig(): array
     {
         $cacheDir = $this->getCacheDir();
+        $logDir = $this->getLogDir();
 
         return [
             'debug' => false,
@@ -40,6 +42,11 @@ class ProdConfig extends AbstractConfig
             'fastroute' => [
                 FastRouteRouter::CONFIG_CACHE_FILE => $cacheDir.'/routes.php',
                 FastRouteRouter::CONFIG_CACHE_ENABLED => true,
+            ],
+            'monolog' => [
+                'name' => 'petstore',
+                'path' => $logDir.'/application.log',
+                'level' => Logger::NOTICE,
             ],
         ];
     }

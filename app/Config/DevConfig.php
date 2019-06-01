@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Config;
 
+use Monolog\Logger;
 use Zend\Expressive\Router\FastRouteRouter;
 
 class DevConfig extends ProdConfig
@@ -24,6 +25,7 @@ class DevConfig extends ProdConfig
         $config['doctrine.orm.em.options']['cache.query']['type'] = 'array';
 
         $config['fastroute'][FastRouteRouter::CONFIG_CACHE_ENABLED] = false;
+        $config['monolog']['level'] = Logger::DEBUG;
 
         return $config;
     }

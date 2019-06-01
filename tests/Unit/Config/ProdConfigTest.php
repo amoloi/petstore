@@ -51,6 +51,11 @@ final class ProdConfigTest extends TestCase
                 'cache_file' => '/path/to/root/var/cache/prod/routes.php',
                 'cache_enabled' => true,
             ],
+            'monolog' => [
+                'name' => 'petstore',
+                'path' => '/path/to/root/var/log/prod/application.log',
+                'level' => 250,
+            ],
         ], $config->getConfig());
     }
 

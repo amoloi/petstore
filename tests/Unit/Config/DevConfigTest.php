@@ -51,6 +51,11 @@ final class DevConfigTest extends TestCase
                 'cache_file' => '/path/to/root/var/cache/dev/routes.php',
                 'cache_enabled' => false,
             ],
+            'monolog' => [
+                'name' => 'petstore',
+                'path' => '/path/to/root/var/log/dev/application.log',
+                'level' => 100,
+            ],
         ], $config->getConfig());
     }
 

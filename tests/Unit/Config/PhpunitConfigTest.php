@@ -51,6 +51,11 @@ final class PhpunitConfigTest extends TestCase
                 'cache_file' => '/path/to/root/var/cache/phpunit/routes.php',
                 'cache_enabled' => false,
             ],
+            'monolog' => [
+                'name' => 'petstore',
+                'path' => '/path/to/root/var/log/phpunit/application.log',
+                'level' => 100,
+            ],
         ], $config->getConfig());
     }
 
