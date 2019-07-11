@@ -15,22 +15,23 @@ A simple skeleton to build api's based on the [zend-expressive][1].
 ## Requirements
 
  * php: ~7.1
- * [chubbyphp/chubbyphp-api-http][3]: ^3.1.0
+ * [chubbyphp/chubbyphp-api-http][3]: ^3.1
  * [chubbyphp/chubbyphp-config][4]: ^1.2
- * [chubbyphp/chubbyphp-deserialization][5]: ^2.7.4
+ * [chubbyphp/chubbyphp-deserialization][5]: ^2.11
  * [chubbyphp/chubbyphp-doctrine-db-service-provider][6]: ^1.2.1
  * [chubbyphp/chubbyphp-negotiation][7]: ^1.2.4
- * [chubbyphp/chubbyphp-serialization][8]: ^2.7.0
- * [chubbyphp/chubbyphp-validation][9]: ^3.3.0
+ * [chubbyphp/chubbyphp-serialization][8]: ^2.8.1
+ * [chubbyphp/chubbyphp-validation][9]: ^3.3.1
  * [doctrine/orm][10]: ^2.6.3
- * [ocramius/proxy-manager][11]: ^2.1.1
- * [pimple/pimple][12]: ^3.2.3
- * [ramsey/uuid][13]: ^3.8.0
- * [swagger-api/swagger-ui][14]: ^3.22.1
- * [symfony/console][15]: ^4.2.1
- * [zendframework/zend-diactoros][16]: ^2.1.2
- * [zendframework/zend-expressive-fastroute][17]: ^3.02
- * [zendframework/zend-expressive][18]: ^3.0.1
+ * [monolog/monolog"][11]: ^1.24
+ * [ocramius/proxy-manager][12]: ^2.1.1
+ * [pimple/pimple][13]: ^3.2.3
+ * [ramsey/uuid][14]: ^3.8
+ * [swagger-api/swagger-ui][15]: ^3.23
+ * [symfony/console][16]: ^4.3.1
+ * [zendframework/zend-diactoros][17]: ^2.1.3
+ * [zendframework/zend-expressive-fastroute][18]: ^3.0.3
+ * [zendframework/zend-expressive][19]: ^3.2.1
 
 ## Environment
 
@@ -197,14 +198,15 @@ Dominik Zogg 2018
 [8]: https://packagist.org/packages/chubbyphp/chubbyphp-serialization
 [9]: https://packagist.org/packages/chubbyphp/chubbyphp-validation
 [10]: https://packagist.org/packages/doctrine/orm
-[11]: https://packagist.org/packages/ocramius/proxy-manager
-[12]: https://packagist.org/packages/pimple/pimple
-[13]: https://packagist.org/packages/ramsey/uuid
-[14]: https://packagist.org/packages/swagger-api/swagger-ui
-[15]: https://packagist.org/packages/symfony/console
-[16]: https://packagist.org/packages/zend-diactoros
-[17]: https://packagist.org/packages/zendframework/zend-expressive-fastroute
-[18]: https://packagist.org/packages/zendframework/zend-expressive
+[11]: https://packagist.org/packages/monolog/monolog
+[12]: https://packagist.org/packages/ocramius/proxy-manager
+[13]: https://packagist.org/packages/pimple/pimple
+[14]: https://packagist.org/packages/ramsey/uuid
+[15]: https://packagist.org/packages/swagger-api/swagger-ui
+[16]: https://packagist.org/packages/symfony/console
+[17]: https://packagist.org/packages/zend-diactoros
+[18]: https://packagist.org/packages/zendframework/zend-expressive-fastroute
+[19]: https://packagist.org/packages/zendframework/zend-expressive
 
 [40]: https://packagist.org/packages/chubbyphp/petstore
 
