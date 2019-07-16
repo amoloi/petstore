@@ -37,6 +37,8 @@ use Zend\Expressive\Router\RouterInterface as ZendRouterInterface;
 
 /**
  * @covers \App\ServiceProvider\RequestHandlerServiceProvider
+ *
+ * @internal
  */
 final class RequestHandlerServiceProviderTest extends TestCase
 {

@@ -7,25 +7,27 @@ namespace App\Tests\Unit\ServiceProvider;
 use App\ServiceProvider\ZendExpressiveServiceProvider;
 use PHPUnit\Framework\TestCase;
 use Pimple\Container;
-use Zend\Expressive\MiddlewareContainer;
-use Zend\Expressive\MiddlewareFactory;
-use Zend\Stratigility\MiddlewarePipe;
-use Zend\Expressive\Router\FastRouteRouter;
-use Zend\Expressive\Router\RouteCollector;
-use Zend\HttpHandlerRunner\Emitter\EmitterStack;
-use Zend\Expressive\Response\ServerRequestErrorResponseGenerator;
-use Zend\HttpHandlerRunner\RequestHandlerRunner;
-use Zend\Stratigility\Middleware\ErrorHandler;
-use Zend\Expressive\Middleware\ErrorResponseGenerator;
-use Zend\Expressive\Router\Middleware\RouteMiddleware;
-use Zend\Expressive\Router\Middleware\MethodNotAllowedMiddleware;
-use Zend\Expressive\Router\Middleware\DispatchMiddleware;
-use Zend\Expressive\Handler\NotFoundHandler;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Zend\Expressive\Handler\NotFoundHandler;
+use Zend\Expressive\Middleware\ErrorResponseGenerator;
+use Zend\Expressive\MiddlewareContainer;
+use Zend\Expressive\MiddlewareFactory;
+use Zend\Expressive\Response\ServerRequestErrorResponseGenerator;
+use Zend\Expressive\Router\FastRouteRouter;
+use Zend\Expressive\Router\Middleware\DispatchMiddleware;
+use Zend\Expressive\Router\Middleware\MethodNotAllowedMiddleware;
+use Zend\Expressive\Router\Middleware\RouteMiddleware;
+use Zend\Expressive\Router\RouteCollector;
+use Zend\HttpHandlerRunner\Emitter\EmitterStack;
+use Zend\HttpHandlerRunner\RequestHandlerRunner;
+use Zend\Stratigility\Middleware\ErrorHandler;
+use Zend\Stratigility\MiddlewarePipe;
 
 /**
  * @covers \App\ServiceProvider\ZendExpressiveServiceProvider
+ *
+ * @internal
  */
 final class ZendExpressiveServiceProviderTest extends TestCase
 {

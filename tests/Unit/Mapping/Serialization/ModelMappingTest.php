@@ -17,6 +17,8 @@ use Zend\Expressive\Router\RouterInterface;
 
 /**
  * @covers \App\Mapping\Serialization\AbstractModelMapping
+ *
+ * @internal
  */
 class ModelMappingTest extends TestCase
 {

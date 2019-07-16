@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\ServiceProvider;
 
 use App\ApiHttp\Factory\InvalidParametersFactory;
+use App\Factory\Collection\PetCollectionFactory;
 use App\Factory\Model\PetFactory;
 use App\Model\Pet;
 use App\Repository\PetRepository;
@@ -20,7 +21,6 @@ use App\RequestHandler\Swagger\YamlRequestHandler as SwaggerYamlRequestHandler;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Zend\Expressive\Router\FastRouteRouter;
-use App\Factory\Collection\PetCollectionFactory;
 
 final class RequestHandlerServiceProvider implements ServiceProviderInterface
 {

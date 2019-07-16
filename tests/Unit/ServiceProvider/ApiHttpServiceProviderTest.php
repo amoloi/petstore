@@ -13,6 +13,8 @@ use Zend\Diactoros\StreamFactory;
 
 /**
  * @covers \App\ServiceProvider\ApiHttpServiceProvider
+ *
+ * @internal
  */
 final class ApiHttpServiceProviderTest extends TestCase
 {

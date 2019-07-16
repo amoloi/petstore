@@ -14,6 +14,8 @@ use Zend\Expressive\Router\RouterInterface;
 
 /**
  * @covers \App\Mapping\Serialization\PetMapping
+ *
+ * @internal
  */
 final class PetMappingTest extends ModelMappingTest
 {

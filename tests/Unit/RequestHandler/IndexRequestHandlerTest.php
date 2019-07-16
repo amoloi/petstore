@@ -16,6 +16,8 @@ use Zend\Expressive\Router\RouterInterface;
 
 /**
  * @covers \App\RequestHandler\IndexRequestHandler
+ *
+ * @internal
  */
 class IndexRequestHandlerTest extends TestCase
 {

@@ -19,6 +19,8 @@ use Zend\Expressive\Router\RouterInterface;
 
 /**
  * @covers \App\Mapping\Serialization\AbstractCollectionMapping
+ *
+ * @internal
  */
 class CollectionMappingTest extends TestCase
 {
