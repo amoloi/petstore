@@ -21,7 +21,7 @@ A simple skeleton to build api's based on the [zend-expressive][1].
  * [chubbyphp/chubbyphp-doctrine-db-service-provider][6]: ^1.2.1
  * [chubbyphp/chubbyphp-negotiation][7]: ^1.2.4
  * [chubbyphp/chubbyphp-serialization][8]: ^2.8.1
- * [chubbyphp/chubbyphp-validation][9]: ^3.3.1
+ * [chubbyphp/chubbyphp-validation][9]: ^3.4
  * [doctrine/orm][10]: ^2.6.3
  * [monolog/monolog"][11]: ^1.24
  * [ocramius/proxy-manager][12]: ^2.1.1
