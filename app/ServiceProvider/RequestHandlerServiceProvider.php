@@ -89,17 +89,11 @@ final class RequestHandlerServiceProvider implements ServiceProviderInterface
         };
 
         $container[IndexRequestHandler::class] = function () use ($container) {
-            return new IndexRequestHandler(
-                $container['api-http.response.factory'],
-                $container['router']
-            );
+            return new IndexRequestHandler($container['api-http.response.factory'], $container['router']);
         };
 
         $container[PingRequestHandler::class] = function () use ($container) {
-            return new PingRequestHandler(
-                $container['api-http.response.factory'],
-                $container['serializer']
-            );
+            return new PingRequestHandler($container['api-http.response.factory'], $container['serializer']);
         };
     }
 }
