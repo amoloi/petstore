@@ -91,7 +91,6 @@ bin/console orm:schema-tool:update --dump-sql --force
 #### Factory
 
  * [App\ApiHttp\Factory\InvalidParametersFactory][50]
- * [App\ApiHttp\Factory\ResponseFactory][51]
 
 ### Collection
 
@@ -210,7 +209,6 @@ Dominik Zogg 2018
 [40]: https://packagist.org/packages/chubbyphp/petstore
 
 [50]: app/ApiHttp/Factory/InvalidParametersFactory.php
-[51]: app/ApiHttp/Factory/ResponseFactory.php
 
 [60]: app/Collection/PetCollection.php
 
