@@ -25,11 +25,12 @@ A simple skeleton to build api's based on the [slimframework][1].
  * [doctrine/orm][11]: ^2.6.3
  * [monolog/monolog][12]: ^1.24
  * [ocramius/proxy-manager][13]: ^2.1.1
+ * [pimple/pimple][14]: ^3.2.3"
  * [ramsey/uuid][15]: ^3.8
- * [slim/slim][15]: ^4.4
  * [slim/psr7][16]: ^0.5
- * [swagger-api/swagger-ui][17]: ^3.23
- * [symfony/console][18]: ^4.3.1
+ * [slim/slim][17]: ^4.4
+ * [swagger-api/swagger-ui][18]: ^3.23
+ * [symfony/console][19]: ^4.3.1
 
 ## Environment
 
@@ -198,11 +199,12 @@ Dominik Zogg 2018
 [11]: https://packagist.org/packages/doctrine/orm
 [12]: https://packagist.org/packages/monolog/monolog
 [13]: https://packagist.org/packages/ocramius/proxy-manager
-[14]: https://packagist.org/packages/ramsey/uuid
-[15]: https://packagist.org/packages/slim/slim
-[16]: https://packagist.org/packages/slim/psr7
-[17]: https://packagist.org/packages/swagger-api/swagger-ui
-[18]: https://packagist.org/packages/symfony/console
+[14]: https://packagist.org/packages/pimple/pimple
+[15]: https://packagist.org/packages/ramsey/uuid
+[16]: https://packagist.org/packages/slim/slim
+[17]: https://packagist.org/packages/slim/psr7
+[18]: https://packagist.org/packages/swagger-api/swagger-ui
+[19]: https://packagist.org/packages/symfony/console
 
 [40]: https://packagist.org/packages/chubbyphp/petstore
 
