@@ -21,16 +21,15 @@ A simple skeleton to build api's based on the [slimframework][1].
  * [chubbyphp/chubbyphp-doctrine-db-service-provider][6]: ^1.2.1
  * [chubbyphp/chubbyphp-negotiation][8]: ^1.2.4
  * [chubbyphp/chubbyphp-serialization][9]: ^2.8.1
- * [chubbyphp/chubbyphp-slim-psr15][10]: ^1.1
- * [chubbyphp/chubbyphp-validation][11]: ^3.4
- * [doctrine/orm][12]: ^2.6.3
- * [monolog/monolog][13]: ^1.24
- * [ocramius/proxy-manager][14]: ^2.1.1
+ * [chubbyphp/chubbyphp-validation][10]: ^3.4
+ * [doctrine/orm][11]: ^2.6.3
+ * [monolog/monolog][12]: ^1.24
+ * [ocramius/proxy-manager][13]: ^2.1.1
  * [ramsey/uuid][15]: ^3.8
- * [slim/slim][16]: ^4.4
- * [slim/psr7][17]: ^0.5
- * [swagger-api/swagger-ui][18]: ^3.23
- * [symfony/console][19]: ^4.3.1
+ * [slim/slim][15]: ^4.4
+ * [slim/psr7][16]: ^0.5
+ * [swagger-api/swagger-ui][17]: ^3.23
+ * [symfony/console][18]: ^4.3.1
 
 ## Environment
 
@@ -195,16 +194,15 @@ Dominik Zogg 2018
 [7]: https://packagist.org/packages/chubbyphp/chubbyphp-lazy-middleware
 [8]: https://packagist.org/packages/chubbyphp/chubbyphp-negotiation
 [9]: https://packagist.org/packages/chubbyphp/chubbyphp-serialization
-[10]: https://packagist.org/packages/chubbyphp/chubbyphp-slim-psr15
-[11]: https://packagist.org/packages/chubbyphp/chubbyphp-validation
-[12]: https://packagist.org/packages/doctrine/orm
-[13]: https://packagist.org/packages/monolog/monolog
-[14]: https://packagist.org/packages/ocramius/proxy-manager
-[15]: https://packagist.org/packages/ramsey/uuid
-[16]: https://packagist.org/packages/slim/slim
-[17]: https://packagist.org/packages/slim/psr7
-[18]: https://packagist.org/packages/swagger-api/swagger-ui
-[19]: https://packagist.org/packages/symfony/console
+[10]: https://packagist.org/packages/chubbyphp/chubbyphp-validation
+[11]: https://packagist.org/packages/doctrine/orm
+[12]: https://packagist.org/packages/monolog/monolog
+[13]: https://packagist.org/packages/ocramius/proxy-manager
+[14]: https://packagist.org/packages/ramsey/uuid
+[15]: https://packagist.org/packages/slim/slim
+[16]: https://packagist.org/packages/slim/psr7
+[17]: https://packagist.org/packages/swagger-api/swagger-ui
+[18]: https://packagist.org/packages/symfony/console
 
 [40]: https://packagist.org/packages/chubbyphp/petstore
 
