@@ -7,6 +7,7 @@ namespace App\Mapping\Serialization;
 use App\Collection\CollectionInterface;
 use Chubbyphp\Serialization\Link\LinkBuilder;
 use Chubbyphp\Serialization\Mapping\NormalizationFieldMappingBuilder;
+use Chubbyphp\Serialization\Mapping\NormalizationFieldMappingInterface;
 use Chubbyphp\Serialization\Mapping\NormalizationLinkMapping;
 use Chubbyphp\Serialization\Mapping\NormalizationLinkMappingInterface;
 use Chubbyphp\Serialization\Mapping\NormalizationObjectMappingInterface;
@@ -67,11 +68,19 @@ abstract class AbstractCollectionMapping implements NormalizationObjectMappingIn
         return [
             new NormalizationLinkMapping('list', [], new CallbackLinkNormalizer(
                 function (string $path, CollectionInterface $collection, NormalizerContextInterface $context) {
-                    $listRoute = $this->router->generateUri($this->getListRouteName());
-                    $listRoute .= '?'.http_build_query(array_replace($context->getRequest()->getQueryParams(), [
+                    $queryParams = [];
+                    if (null !== $request = $context->getRequest()) {
+                        $queryParams = $request->getQueryParams();
+                    }
+
+                    /** @var array<string, mixed> $queryParams */
+                    $queryParams = array_merge($queryParams, [
                         'offset' => $collection->getOffset(),
                         'limit' => $collection->getLimit(),
-                    ]));
+                    ]);
+
+                    $listRoute = $this->router->generateUri($this->getListRouteName())
+                        .'?'.http_build_query($queryParams);
 
                     return LinkBuilder
                         ::create($listRoute)
