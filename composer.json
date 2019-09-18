@@ -3,7 +3,7 @@
     "type": "project",
     "license": "MIT",
     "require": {
-        "php": "^7.1",
+        "php": "^7.2",
         "chubbyphp/chubbyphp-api-http": "^3.1",
         "chubbyphp/chubbyphp-config": "^1.2",
         "chubbyphp/chubbyphp-cors": "^1.0",
