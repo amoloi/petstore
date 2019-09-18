@@ -18,6 +18,7 @@ use App\ServiceProvider\MiddlewareServiceProvider;
 use App\ServiceProvider\RequestHandlerServiceProvider;
 use App\ServiceProvider\ZendExpressiveServiceProvider;
 use Chubbyphp\ApiHttp\Middleware\AcceptAndContentTypeMiddleware;
+use Chubbyphp\Cors\CorsMiddleware;
 use Pimple\Container;
 use Zend\Expressive\Application;
 use Zend\Expressive\Handler\NotFoundHandler;
@@ -46,6 +47,7 @@ $web = new Application(
 );
 
 $web->pipe(ErrorHandler::class);
+$web->pipe(CorsMiddleware::class);
 $web->pipe(RouteMiddleware::class);
 $web->pipe(MethodNotAllowedMiddleware::class);
 $web->pipe(DispatchMiddleware::class);
