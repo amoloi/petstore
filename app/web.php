@@ -18,6 +18,7 @@ use App\ServiceProvider\MiddlewareServiceProvider;
 use App\ServiceProvider\RequestHandlerServiceProvider;
 use App\ServiceProvider\SlimServiceProvider;
 use Chubbyphp\ApiHttp\Middleware\AcceptAndContentTypeMiddleware;
+use Chubbyphp\Cors\CorsMiddleware;
 use Pimple\Container;
 use Pimple\Psr11\Container as PsrContainer;
 use Slim\App;
@@ -40,6 +41,7 @@ $web = new App(
     $container[RouteCollector::class]
 );
 
+$web->add(CorsMiddleware::class);
 $web->addErrorMiddleware($container['debug'], true, true);
 
 $web->get('/', IndexRequestHandler::class)->setName('index');
