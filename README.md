@@ -17,8 +17,9 @@ A simple skeleton to build api's based on the [slimframework][1].
  * php: ~7.1
  * [chubbyphp/chubbyphp-api-http][3]: ^3.1
  * [chubbyphp/chubbyphp-config][4]: ^1.2
- * [chubbyphp/chubbyphp-deserialization][5]: ^2.11
- * [chubbyphp/chubbyphp-doctrine-db-service-provider][6]: ^1.2.1
+ * [chubbyphp/chubbyphp-cors][5]: ^1.0
+ * [chubbyphp/chubbyphp-deserialization][6]: ^2.11
+ * [chubbyphp/chubbyphp-doctrine-db-service-provider][7]: ^1.2.1
  * [chubbyphp/chubbyphp-negotiation][8]: ^1.2.4
  * [chubbyphp/chubbyphp-serialization][9]: ^2.8.1
  * [chubbyphp/chubbyphp-validation][10]: ^3.4
@@ -190,9 +191,9 @@ Dominik Zogg 2018
 
 [3]: https://packagist.org/packages/chubbyphp/chubbyphp-api-http
 [4]: https://packagist.org/packages/chubbyphp/chubbyphp-config
-[5]: https://packagist.org/packages/chubbyphp/chubbyphp-deserialization
-[6]: https://packagist.org/packages/chubbyphp/chubbyphp-doctrine-db-service-provider
-[7]: https://packagist.org/packages/chubbyphp/chubbyphp-lazy-middleware
+[5]: https://packagist.org/packages/chubbyphp/chubbyphp-cors
+[6]: https://packagist.org/packages/chubbyphp/chubbyphp-deserialization
+[7]: https://packagist.org/packages/chubbyphp/chubbyphp-doctrine-db-service-provider
 [8]: https://packagist.org/packages/chubbyphp/chubbyphp-negotiation
 [9]: https://packagist.org/packages/chubbyphp/chubbyphp-serialization
 [10]: https://packagist.org/packages/chubbyphp/chubbyphp-validation
