@@ -27,19 +27,14 @@ final class SlimServiceProvider implements ServiceProviderInterface
         };
 
         $container[RouteCollector::class] = function () use ($container) {
-            $routeCollector = new RouteCollector(
+            return new RouteCollector(
                 $container['api-http.response.factory'],
                 $container[CallableResolver::class],
-                $container[PsrContainer::class]
+                $container[PsrContainer::class],
+                new RequestHandler(true),
+                null,
+                $container['routerCacheFile']
             );
-
-            $routeCollector->setDefaultInvocationStrategy(new RequestHandler(true));
-
-            if (null !== $routerCacheFile = $container['routerCacheFile']) {
-                $routeCollector->setCacheFile($routerCacheFile);
-            }
-
-            return $routeCollector;
         };
 
         $container['router'] = function () use ($container) {
