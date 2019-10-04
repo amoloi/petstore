@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\ServiceProvider;
 
 use Pimple\Container;
-use Pimple\Psr11\Container as Psr11Container;
+use Pimple\Psr11\Container as PsrContainer;
 use Pimple\ServiceProviderInterface;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequestFactory;
@@ -32,8 +32,6 @@ final class ZendExpressiveServiceProvider implements ServiceProviderInterface
      */
     public function register(Container $container): void
     {
-        $psrContainer = new Psr11Container($container);
-
         $container['zend.expressive.responseFactory'] = function () {
             return function () {
                 return new Response();
@@ -46,8 +44,8 @@ final class ZendExpressiveServiceProvider implements ServiceProviderInterface
             };
         };
 
-        $container[MiddlewareContainer::class] = function () use ($psrContainer) {
-            return new MiddlewareContainer($psrContainer);
+        $container[MiddlewareContainer::class] = function () use ($container) {
+            return new MiddlewareContainer($container[PsrContainer::class]);
         };
 
         $container[MiddlewareFactory::class] = function () use ($container) {

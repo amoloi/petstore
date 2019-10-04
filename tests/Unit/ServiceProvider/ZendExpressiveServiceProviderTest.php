@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace App\Tests\Unit\ServiceProvider;
 
 use App\ServiceProvider\ZendExpressiveServiceProvider;
+use Chubbyphp\Mock\MockByCallsTrait;
 use PHPUnit\Framework\TestCase;
 use Pimple\Container;
+use Pimple\Psr11\Container as PsrContainer;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Expressive\Handler\NotFoundHandler;
@@ -31,11 +34,14 @@ use Zend\Stratigility\MiddlewarePipe;
  */
 final class ZendExpressiveServiceProviderTest extends TestCase
 {
+    use MockByCallsTrait;
+
     public function testRegister(): void
     {
         $container = new Container([
             'debug' => true,
             'fastroute' => [],
+            PsrContainer::class => $this->getMockByCalls(ContainerInterface::class),
         ]);
 
         $serviceProvider = new ZendExpressiveServiceProvider();
