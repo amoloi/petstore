@@ -18,10 +18,6 @@ final class SlimServiceProvider implements ServiceProviderInterface
      */
     public function register(Container $container): void
     {
-        $container[PsrContainer::class] = function () use ($container) {
-            return new PsrContainer($container);
-        };
-
         $container[CallableResolver::class] = function () use ($container) {
             return new CallableResolver($container[PsrContainer::class]);
         };
