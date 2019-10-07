@@ -28,7 +28,7 @@ A simple skeleton to build api's based on the [slimframework][1].
  * [ocramius/proxy-manager][13]: ^2.1.1
  * [pimple/pimple][14]: ^3.2.3"
  * [ramsey/uuid][15]: ^3.8
- * [slim/psr7][16]: ^0.5
+ * [slim/psr7][16]: ^0.6
  * [slim/slim][17]: ^4.4
  * [swagger-api/swagger-ui][18]: ^3.23
  * [symfony/console][19]: ^4.3.1
