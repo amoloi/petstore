@@ -13,16 +13,13 @@ use Slim\Routing\RouteCollector;
 
 final class SlimServiceProvider implements ServiceProviderInterface
 {
-    /**
-     * @param Container $container
-     */
     public function register(Container $container): void
     {
-        $container[CallableResolver::class] = function () use ($container) {
+        $container[CallableResolver::class] = static function () use ($container) {
             return new CallableResolver($container[PsrContainer::class]);
         };
 
-        $container[RouteCollector::class] = function () use ($container) {
+        $container[RouteCollector::class] = static function () use ($container) {
             return new RouteCollector(
                 $container['api-http.response.factory'],
                 $container[CallableResolver::class],
@@ -33,7 +30,7 @@ final class SlimServiceProvider implements ServiceProviderInterface
             );
         };
 
-        $container['router'] = function () use ($container) {
+        $container['router'] = static function () use ($container) {
             return $container[RouteCollector::class]->getRouteParser();
         };
     }

@@ -33,7 +33,7 @@ abstract class AbstractCollectionMapping implements NormalizationObjectMappingIn
     /**
      * @param string $path
      *
-     * @return NormalizationFieldMappingInterface[]
+     * @return array<NormalizationFieldMappingInterface>
      */
     public function getNormalizationFieldMappings(string $path): array
     {
@@ -49,7 +49,7 @@ abstract class AbstractCollectionMapping implements NormalizationObjectMappingIn
     /**
      * @param string $path
      *
-     * @return NormalizationFieldMappingInterface[]
+     * @return array<NormalizationFieldMappingInterface>
      */
     public function getNormalizationEmbeddedFieldMappings(string $path): array
     {
@@ -61,7 +61,7 @@ abstract class AbstractCollectionMapping implements NormalizationObjectMappingIn
     /**
      * @param string $path
      *
-     * @return NormalizationLinkMappingInterface[]
+     * @return array<NormalizationLinkMappingInterface>
      */
     public function getNormalizationLinkMappings(string $path): array
     {
@@ -73,14 +73,14 @@ abstract class AbstractCollectionMapping implements NormalizationObjectMappingIn
                         $queryParams = $request->getQueryParams();
                     }
 
-                    /** @var array<string, mixed> */
+                    /** @var array<string, array|string|float|int|bool> $queryParams */
                     $queryParams = array_merge($queryParams, [
                         'offset' => $collection->getOffset(),
                         'limit' => $collection->getLimit(),
                     ]);
 
                     return LinkBuilder
-                        ::create( $this->router->urlFor( $this->getListRouteName(), [], $queryParams))
+                        ::create($this->router->urlFor($this->getListRouteName(), [], $queryParams))
                         ->setAttributes(['method' => 'GET'])
                         ->getLink()
                     ;
@@ -97,13 +97,7 @@ abstract class AbstractCollectionMapping implements NormalizationObjectMappingIn
         ];
     }
 
-    /**
-     * @return string
-     */
     abstract protected function getListRouteName(): string;
 
-    /**
-     * @return string
-     */
     abstract protected function getCreateRouteName(): string;
 }

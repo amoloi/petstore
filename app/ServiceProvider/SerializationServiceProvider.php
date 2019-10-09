@@ -26,9 +26,6 @@ use Pimple\ServiceProviderInterface;
 
 final class SerializationServiceProvider implements ServiceProviderInterface
 {
-    /**
-     * @param Container $container
-     */
     public function register(Container $container): void
     {
         $container['serializer.mappingConfigs'] = [
@@ -56,12 +53,6 @@ final class SerializationServiceProvider implements ServiceProviderInterface
         };
     }
 
-    /**
-     * @param Container     $container
-     * @param MappingConfig $mappingConfig
-     *
-     * @return NormalizationObjectMappingInterface
-     */
     private function resolve(Container $container, MappingConfig $mappingConfig): NormalizationObjectMappingInterface
     {
         $mappingClass = $mappingConfig->getMappingClass();
