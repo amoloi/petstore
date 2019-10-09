@@ -27,58 +27,55 @@ use Zend\Stratigility\MiddlewarePipe;
 
 final class ZendExpressiveServiceProvider implements ServiceProviderInterface
 {
-    /**
-     * @param Container $container
-     */
     public function register(Container $container): void
     {
-        $container['zend.expressive.responseFactory'] = function () {
-            return function () {
+        $container['zend.expressive.responseFactory'] = static function () {
+            return static function () {
                 return new Response();
             };
         };
 
-        $container['zend.expressive.serverRequestFactory'] = function () {
-            return function () {
+        $container['zend.expressive.serverRequestFactory'] = static function () {
+            return static function () {
                 return ServerRequestFactory::fromGlobals();
             };
         };
 
-        $container[MiddlewareContainer::class] = function () use ($container) {
+        $container[MiddlewareContainer::class] = static function () use ($container) {
             return new MiddlewareContainer($container[PsrContainer::class]);
         };
 
-        $container[MiddlewareFactory::class] = function () use ($container) {
+        $container[MiddlewareFactory::class] = static function () use ($container) {
             return new MiddlewareFactory($container[MiddlewareContainer::class]);
         };
 
-        $container[MiddlewarePipe::class] = function () {
+        $container[MiddlewarePipe::class] = static function () {
             return new MiddlewarePipe();
         };
 
-        $container[FastRouteRouter::class] = function () use ($container) {
+        $container[FastRouteRouter::class] = static function () use ($container) {
             return new FastRouteRouter(null, null, $container['fastroute']);
         };
 
-        $container[RouteCollector::class] = function () use ($container) {
+        $container[RouteCollector::class] = static function () use ($container) {
             return new RouteCollector($container[FastRouteRouter::class]);
         };
 
-        $container[EmitterStack::class] = function () {
+        $container[EmitterStack::class] = static function () {
             $emitterStack = new EmitterStack();
             $emitterStack->push(new SapiEmitter());
 
             return $emitterStack;
         };
 
-        $container[ServerRequestErrorResponseGenerator::class] = function () use ($container) {
+        $container[ServerRequestErrorResponseGenerator::class] = static function () use ($container) {
             return new ServerRequestErrorResponseGenerator(
                 $container['zend.expressive.responseFactory'],
                 $container['debug']
             );
         };
 
-        $container[RequestHandlerRunner::class] = function () use ($container) {
+        $container[RequestHandlerRunner::class] = static function () use ($container) {
             return new RequestHandlerRunner(
                 $container[MiddlewarePipe::class],
                 $container[EmitterStack::class],
@@ -87,30 +84,30 @@ final class ZendExpressiveServiceProvider implements ServiceProviderInterface
             );
         };
 
-        $container[ErrorHandler::class] = function () use ($container) {
+        $container[ErrorHandler::class] = static function () use ($container) {
             return new ErrorHandler(
                 $container['zend.expressive.responseFactory'],
                 $container[ErrorResponseGenerator::class]
             );
         };
 
-        $container[ErrorResponseGenerator::class] = function () use ($container) {
+        $container[ErrorResponseGenerator::class] = static function () use ($container) {
             return new ErrorResponseGenerator($container['debug']);
         };
 
-        $container[RouteMiddleware::class] = function () use ($container) {
+        $container[RouteMiddleware::class] = static function () use ($container) {
             return new RouteMiddleware($container[FastRouteRouter::class]);
         };
 
-        $container[MethodNotAllowedMiddleware::class] = function () use ($container) {
+        $container[MethodNotAllowedMiddleware::class] = static function () use ($container) {
             return new MethodNotAllowedMiddleware($container['zend.expressive.responseFactory']);
         };
 
-        $container[DispatchMiddleware::class] = function () {
+        $container[DispatchMiddleware::class] = static function () {
             return new DispatchMiddleware();
         };
 
-        $container[NotFoundHandler::class] = function () use ($container) {
+        $container[NotFoundHandler::class] = static function () use ($container) {
             return new NotFoundHandler($container['zend.expressive.responseFactory']);
         };
     }
