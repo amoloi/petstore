@@ -102,7 +102,7 @@ class CollectionMappingTest extends TestCase
 
         /** @var ServerRequestInterface|MockObject $request */
         $request = $this->getMockByCalls(ServerRequestInterface::class, [
-            Call::create('getQueryParams')->with()->willReturn([]),
+            Call::create('getQueryParams')->with()->willReturn(['key' => 'value']),
         ]);
 
         /** @var NormalizerContextInterface|MockObject $context */
@@ -114,7 +114,7 @@ class CollectionMappingTest extends TestCase
         $create = $linkMappings[1]->getLinkNormalizer()->normalizeLink('/', $object, $context);
 
         self::assertSame([
-            'href' => sprintf('%s?offset=0&limit=20', $this->getCollectionPath()),
+            'href' => sprintf('%s?key=value&offset=0&limit=20', $this->getCollectionPath()),
             'templated' => false,
             'rel' => [],
             'attributes' => [
