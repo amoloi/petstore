@@ -72,16 +72,8 @@ composer create-project chubbyphp/petstore myproject "dev-slim"
 
 ## Setup
 
-### Create database
-
 ```sh
-bin/console dbal:database:create
-```
-
-### Create / Update schema
-
-```sh
-bin/console orm:schema-tool:update --dump-sql --force
+composer setup:dev
 ```
 
 ## Structure
