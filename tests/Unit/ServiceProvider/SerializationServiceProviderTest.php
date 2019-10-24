@@ -7,6 +7,10 @@ namespace App\Tests\Unit\ServiceProvider;
 use App\Mapping\MappingConfig;
 use App\ServiceProvider\SerializationServiceProvider;
 use Chubbyphp\Mock\MockByCallsTrait;
+use Chubbyphp\Serialization\Encoder\JsonTypeEncoder;
+use Chubbyphp\Serialization\Encoder\JsonxTypeEncoder;
+use Chubbyphp\Serialization\Encoder\UrlEncodedTypeEncoder;
+use Chubbyphp\Serialization\Encoder\YamlTypeEncoder;
 use Chubbyphp\Serialization\Mapping\CallableNormalizationObjectMapping;
 use Chubbyphp\Serialization\Mapping\NormalizationObjectMappingInterface;
 use PHPUnit\Framework\TestCase;
@@ -30,6 +34,23 @@ final class SerializationServiceProviderTest extends TestCase
 
         $serviceProvider = new SerializationServiceProvider();
         $serviceProvider->register($container);
+
+        self::assertArrayHasKey('serializer.encodertypes', $container);
+
+        $encoderTypes = $container['serializer.encodertypes'];
+
+        self::assertCount(4, $encoderTypes);
+
+        self::assertInstanceOf(JsonTypeEncoder::class, array_shift($encoderTypes));
+
+        $jsonxTypeEncoder = array_shift($encoderTypes);
+
+        self::assertInstanceOf(JsonxTypeEncoder::class, $jsonxTypeEncoder);
+
+        self::assertSame('application/jsonx+xml', $jsonxTypeEncoder->getContentType());
+
+        self::assertInstanceOf(UrlEncodedTypeEncoder::class, array_shift($encoderTypes));
+        self::assertInstanceOf(YamlTypeEncoder::class, array_shift($encoderTypes));
 
         self::assertArrayHasKey('serializer.normalizer.objectmappings', $container);
 
