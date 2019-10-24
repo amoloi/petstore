@@ -19,6 +19,10 @@ use Chubbyphp\ApiHttp\Serialization\ApiProblem\ClientError\NotAcceptableMapping;
 use Chubbyphp\ApiHttp\Serialization\ApiProblem\ClientError\NotFoundMapping;
 use Chubbyphp\ApiHttp\Serialization\ApiProblem\ClientError\UnprocessableEntityMapping;
 use Chubbyphp\ApiHttp\Serialization\ApiProblem\ClientError\UnsupportedMediaTypeMapping;
+use Chubbyphp\Serialization\Encoder\JsonTypeEncoder;
+use Chubbyphp\Serialization\Encoder\JsonxTypeEncoder;
+use Chubbyphp\Serialization\Encoder\UrlEncodedTypeEncoder;
+use Chubbyphp\Serialization\Encoder\YamlTypeEncoder;
 use Chubbyphp\Serialization\Mapping\CallableNormalizationObjectMapping;
 use Chubbyphp\Serialization\Mapping\NormalizationObjectMappingInterface;
 use Pimple\Container;
@@ -28,6 +32,17 @@ final class SerializationServiceProvider implements ServiceProviderInterface
 {
     public function register(Container $container): void
     {
+        $container['serializer.encodertypes'] = function () {
+            $encoderTypes = [];
+
+            $encoderTypes[] = new JsonTypeEncoder();
+            $encoderTypes[] = new JsonxTypeEncoder(false, 'application/jsonx+xml');
+            $encoderTypes[] = new UrlEncodedTypeEncoder();
+            $encoderTypes[] = new YamlTypeEncoder();
+
+            return $encoderTypes;
+        };
+
         $container['serializer.mappingConfigs'] = [
             BadRequest::class => new MappingConfig(BadRequestMapping::class),
             NotAcceptable::class => new MappingConfig(NotAcceptableMapping::class),
