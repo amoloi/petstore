@@ -37,16 +37,7 @@ A simple skeleton to build api's based on the [slimframework][1].
 Add the following environment variable to your system, for example within `~./bash_aliases`:
 
 ```sh
-export GIT_AUTHOR_EMAIL='john.doe@gmail.com'
-export GIT_AUTHOR_NAME='John Doe'
-
 export USER_ID=$(id -u)
-```
-
-Add the following to you `/etc/hosts`:
-
-```sh
-127.0.0.1 petstore.local
 ```
 
 ### Docker
@@ -56,7 +47,7 @@ docker-compose up -d
 docker-compose exec php bash
 ```
 
-https://petstore.local:1337
+https://localhost:1337
 
 ## Installation
 
