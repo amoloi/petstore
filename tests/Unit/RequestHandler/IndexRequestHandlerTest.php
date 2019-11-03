@@ -19,7 +19,7 @@ use Zend\Expressive\Router\RouterInterface;
  *
  * @internal
  */
-class IndexRequestHandlerTest extends TestCase
+final class IndexRequestHandlerTest extends TestCase
 {
     use MockByCallsTrait;
 

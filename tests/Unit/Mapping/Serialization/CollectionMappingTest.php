@@ -22,7 +22,7 @@ use Zend\Expressive\Router\RouterInterface;
  *
  * @internal
  */
-class CollectionMappingTest extends TestCase
+final class CollectionMappingTest extends TestCase
 {
     use MockByCallsTrait;
 
