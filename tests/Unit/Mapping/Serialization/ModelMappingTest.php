@@ -20,7 +20,7 @@ use Slim\Interfaces\RouteParserInterface;
  *
  * @internal
  */
-class ModelMappingTest extends TestCase
+final class ModelMappingTest extends TestCase
 {
     use MockByCallsTrait;
 

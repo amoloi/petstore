@@ -19,7 +19,7 @@ use Slim\Interfaces\RouteParserInterface;
  *
  * @internal
  */
-class IndexRequestHandlerTest extends TestCase
+final class IndexRequestHandlerTest extends TestCase
 {
     use MockByCallsTrait;
 
