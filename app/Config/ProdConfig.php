@@ -9,9 +9,6 @@ use Zend\Expressive\Router\FastRouteRouter;
 
 class ProdConfig extends AbstractConfig
 {
-    /**
-     * @return array
-     */
     public function getConfig(): array
     {
         $cacheDir = $this->getCacheDir();
