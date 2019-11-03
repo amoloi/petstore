@@ -22,10 +22,6 @@ final class IndexRequestHandler implements RequestHandlerInterface
      */
     private $router;
 
-    /**
-     * @param ResponseFactoryInterface $responseFactory
-     * @param RouteParserInterface     $router
-     */
     public function __construct(
         ResponseFactoryInterface $responseFactory,
         RouteParserInterface $router
