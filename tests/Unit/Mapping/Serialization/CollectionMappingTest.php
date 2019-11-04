@@ -22,7 +22,7 @@ use Slim\Interfaces\RouteParserInterface;
  *
  * @internal
  */
-final class CollectionMappingTest extends TestCase
+class CollectionMappingTest extends TestCase
 {
     use MockByCallsTrait;
 
