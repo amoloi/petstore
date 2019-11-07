@@ -59,7 +59,7 @@ class ProdConfig extends AbstractConfig
         ];
     }
 
-    protected function getEnv(): string
+    public function getEnv(): string
     {
         return 'prod';
     }
