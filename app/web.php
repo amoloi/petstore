@@ -31,44 +31,46 @@ use Zend\HttpHandlerRunner\RequestHandlerRunner;
 use Zend\Stratigility\Middleware\ErrorHandler;
 use Zend\Stratigility\MiddlewarePipe;
 
-require __DIR__.'/bootstrap.php';
+require __DIR__.'/../vendor/autoload.php';
 
-/** @var Container $container */
-$container = require __DIR__.'/container.php';
-$container->register(new MiddlewareServiceProvider());
-$container->register(new RequestHandlerServiceProvider());
-$container->register(new ZendExpressiveServiceProvider());
+return static function (string $env) {
+    /** @var Container $container */
+    $container = (require __DIR__.'/container.php')($env);
+    $container->register(new MiddlewareServiceProvider());
+    $container->register(new RequestHandlerServiceProvider());
+    $container->register(new ZendExpressiveServiceProvider());
 
-$web = new Application(
-    $container[MiddlewareFactory::class],
-    $container[MiddlewarePipe::class],
-    $container[RouteCollector::class],
-    $container[RequestHandlerRunner::class]
-);
+    $web = new Application(
+        $container[MiddlewareFactory::class],
+        $container[MiddlewarePipe::class],
+        $container[RouteCollector::class],
+        $container[RequestHandlerRunner::class]
+    );
 
-$web->pipe(ErrorHandler::class);
-$web->pipe(CorsMiddleware::class);
-$web->pipe(RouteMiddleware::class);
-$web->pipe(MethodNotAllowedMiddleware::class);
-$web->pipe(DispatchMiddleware::class);
-$web->pipe(NotFoundHandler::class);
+    $web->pipe(ErrorHandler::class);
+    $web->pipe(CorsMiddleware::class);
+    $web->pipe(RouteMiddleware::class);
+    $web->pipe(MethodNotAllowedMiddleware::class);
+    $web->pipe(DispatchMiddleware::class);
+    $web->pipe(NotFoundHandler::class);
 
-$web->get('/', IndexRequestHandler::class, 'index');
-$web->get('/api', SwaggerIndexRequestHandler::class, 'swagger_index');
-$web->get('/api/swagger', SwaggerYamlRequestHandler::class, 'swagger_yml');
-$web->get('/api/ping', [AcceptAndContentTypeMiddleware::class, PingRequestHandler::class], 'ping');
-$web->get('/api/pets', [AcceptAndContentTypeMiddleware::class, ListRequestHandler::class.Pet::class], 'pet_list');
-$web->post('/api/pets', [AcceptAndContentTypeMiddleware::class, CreateRequestHandler::class.Pet::class], 'pet_create');
-$web->get('/api/pets/{id}', [AcceptAndContentTypeMiddleware::class, ReadRequestHandler::class.Pet::class], 'pet_read');
-$web->put(
-    '/api/pets/{id}',
-    [AcceptAndContentTypeMiddleware::class, UpdateRequestHandler::class.Pet::class],
-    'pet_update'
-);
-$web->delete(
-    '/api/pets/{id}',
-    [AcceptAndContentTypeMiddleware::class, DeleteRequestHandler::class.Pet::class],
-    'pet_delete'
-);
+    $web->get('/', IndexRequestHandler::class, 'index');
+    $web->get('/api', SwaggerIndexRequestHandler::class, 'swagger_index');
+    $web->get('/api/swagger', SwaggerYamlRequestHandler::class, 'swagger_yml');
+    $web->get('/api/ping', [AcceptAndContentTypeMiddleware::class, PingRequestHandler::class], 'ping');
+    $web->get('/api/pets', [AcceptAndContentTypeMiddleware::class, ListRequestHandler::class.Pet::class], 'pet_list');
+    $web->post('/api/pets', [AcceptAndContentTypeMiddleware::class, CreateRequestHandler::class.Pet::class], 'pet_create');
+    $web->get('/api/pets/{id}', [AcceptAndContentTypeMiddleware::class, ReadRequestHandler::class.Pet::class], 'pet_read');
+    $web->put(
+        '/api/pets/{id}',
+        [AcceptAndContentTypeMiddleware::class, UpdateRequestHandler::class.Pet::class],
+        'pet_update'
+    );
+    $web->delete(
+        '/api/pets/{id}',
+        [AcceptAndContentTypeMiddleware::class, DeleteRequestHandler::class.Pet::class],
+        'pet_delete'
+    );
 
-return $web;
+    return $web;
+};
