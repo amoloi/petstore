@@ -26,36 +26,38 @@ use Slim\CallableResolver;
 use Slim\Routing\RouteCollector;
 use Slim\Routing\RouteCollectorProxy;
 
-require __DIR__.'/bootstrap.php';
+require __DIR__.'/../vendor/autoload.php';
 
-/** @var Container $container */
-$container = require __DIR__.'/container.php';
-$container->register(new MiddlewareServiceProvider());
-$container->register(new RequestHandlerServiceProvider());
-$container->register(new SlimServiceProvider());
+return static function (string $env) {
+    /** @var Container $container */
+    $container = (require __DIR__.'/container.php')($env);
+    $container->register(new MiddlewareServiceProvider());
+    $container->register(new RequestHandlerServiceProvider());
+    $container->register(new SlimServiceProvider());
 
-$web = new App(
-    $container['api-http.response.factory'],
-    $container[PsrContainer::class],
-    $container[CallableResolver::class],
-    $container[RouteCollector::class]
-);
+    $web = new App(
+        $container['api-http.response.factory'],
+        $container[PsrContainer::class],
+        $container[CallableResolver::class],
+        $container[RouteCollector::class]
+    );
 
-$web->add(CorsMiddleware::class);
-$web->addErrorMiddleware($container['debug'], true, true);
+    $web->add(CorsMiddleware::class);
+    $web->addErrorMiddleware($container['debug'], true, true);
 
-$web->get('/', IndexRequestHandler::class)->setName('index');
-$web->group('/api', function (RouteCollectorProxy $group): void {
-    $group->get('', SwaggerIndexRequestHandler::class)->setName('swagger_index');
-    $group->get('/swagger', SwaggerYamlRequestHandler::class)->setName('swagger_yml');
-    $group->get('/ping', PingRequestHandler::class)->setName('ping')->add(AcceptAndContentTypeMiddleware::class);
-    $group->group('/pets', function (RouteCollectorProxy $group): void {
-        $group->get('', ListRequestHandler::class.Pet::class)->setName('pet_list');
-        $group->post('', CreateRequestHandler::class.Pet::class)->setName('pet_create');
-        $group->get('/{id}', ReadRequestHandler::class.Pet::class)->setName('pet_read');
-        $group->put('/{id}', UpdateRequestHandler::class.Pet::class)->setName('pet_update');
-        $group->delete('/{id}', DeleteRequestHandler::class.Pet::class)->setName('pet_delete');
-    })->add(AcceptAndContentTypeMiddleware::class);
-});
+    $web->get('/', IndexRequestHandler::class)->setName('index');
+    $web->group('/api', function (RouteCollectorProxy $group): void {
+        $group->get('', SwaggerIndexRequestHandler::class)->setName('swagger_index');
+        $group->get('/swagger', SwaggerYamlRequestHandler::class)->setName('swagger_yml');
+        $group->get('/ping', PingRequestHandler::class)->setName('ping')->add(AcceptAndContentTypeMiddleware::class);
+        $group->group('/pets', function (RouteCollectorProxy $group): void {
+            $group->get('', ListRequestHandler::class.Pet::class)->setName('pet_list');
+            $group->post('', CreateRequestHandler::class.Pet::class)->setName('pet_create');
+            $group->get('/{id}', ReadRequestHandler::class.Pet::class)->setName('pet_read');
+            $group->put('/{id}', UpdateRequestHandler::class.Pet::class)->setName('pet_update');
+            $group->delete('/{id}', DeleteRequestHandler::class.Pet::class)->setName('pet_delete');
+        })->add(AcceptAndContentTypeMiddleware::class);
+    });
 
-return $web;
+    return $web;
+};
