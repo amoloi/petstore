@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Config\DevConfig;
+use App\Config\PhpunitConfig;
+use App\Config\ProdConfig;
 use App\Model\Pet;
 use App\RequestHandler\Crud\CreateRequestHandler;
 use App\RequestHandler\Crud\DeleteRequestHandler;
@@ -18,6 +21,8 @@ use App\ServiceProvider\MiddlewareServiceProvider;
 use App\ServiceProvider\RequestHandlerServiceProvider;
 use App\ServiceProvider\SlimServiceProvider;
 use Chubbyphp\ApiHttp\Middleware\AcceptAndContentTypeMiddleware;
+use Chubbyphp\Config\ConfigProvider;
+use Chubbyphp\Config\ServiceProvider\ConfigServiceProvider;
 use Chubbyphp\Cors\CorsMiddleware;
 use Pimple\Container;
 use Pimple\Psr11\Container as PsrContainer;
@@ -34,6 +39,16 @@ return static function (string $env) {
     $container->register(new MiddlewareServiceProvider());
     $container->register(new RequestHandlerServiceProvider());
     $container->register(new SlimServiceProvider());
+
+    // always load this service provider last
+    // so that the values of other service providers can be overwritten.
+    $container->register(new ConfigServiceProvider(
+        new ConfigProvider([
+            new DevConfig(__DIR__.'/..'),
+            new PhpunitConfig(__DIR__.'/..'),
+            new ProdConfig(__DIR__.'/..'),
+        ])
+    ));
 
     $web = new App(
         $container['api-http.response.factory'],
