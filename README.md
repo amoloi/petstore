@@ -21,7 +21,7 @@ A simple skeleton to build api's based on the [slimframework][1].
  * [chubbyphp/chubbyphp-doctrine-db-service-provider][7]: ^1.4
  * [chubbyphp/chubbyphp-negotiation][8]: ^1.4
  * [chubbyphp/chubbyphp-serialization][9]: ^2.12
- * [chubbyphp/chubbyphp-validation][10]: ^3.5
+ * [chubbyphp/chubbyphp-validation][10]: ^3.6
  * [doctrine/orm][11]: ^2.6.4
  * [monolog/monolog][12]: ^2.0
  * [ocramius/proxy-manager][13]: ^2.2.3
