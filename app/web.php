@@ -17,18 +17,17 @@ use App\RequestHandler\IndexRequestHandler;
 use App\RequestHandler\PingRequestHandler;
 use App\RequestHandler\Swagger\IndexRequestHandler as SwaggerIndexRequestHandler;
 use App\RequestHandler\Swagger\YamlRequestHandler as SwaggerYamlRequestHandler;
-use App\ServiceProvider\MiddlewareServiceProvider;
-use App\ServiceProvider\RequestHandlerServiceProvider;
-use App\ServiceProvider\SlimServiceProvider;
+use App\ServiceFactory\MiddlewareServiceFactory;
+use App\ServiceFactory\RequestHandlerServiceFactory;
+use App\ServiceFactory\SlimServiceFactory;
 use Chubbyphp\ApiHttp\Middleware\AcceptAndContentTypeMiddleware;
 use Chubbyphp\Config\ConfigProvider;
-use Chubbyphp\Config\ServiceProvider\ConfigServiceProvider;
+use Chubbyphp\Config\ServiceFactory\ConfigServiceFactory;
+use Chubbyphp\Container\Container;
 use Chubbyphp\Cors\CorsMiddleware;
-use Pimple\Container;
-use Pimple\Psr11\Container as PsrContainer;
 use Slim\App;
-use Slim\CallableResolver;
-use Slim\Routing\RouteCollector;
+use Slim\Interfaces\CallableResolverInterface;
+use Slim\Interfaces\RouteCollectorInterface;
 use Slim\Routing\RouteCollectorProxy;
 
 require __DIR__.'/../vendor/autoload.php';
@@ -36,29 +35,27 @@ require __DIR__.'/../vendor/autoload.php';
 return static function (string $env) {
     /** @var Container $container */
     $container = (require __DIR__.'/container.php')();
-    $container->register(new MiddlewareServiceProvider());
-    $container->register(new RequestHandlerServiceProvider());
-    $container->register(new SlimServiceProvider());
+    $container->factories((new MiddlewareServiceFactory())());
+    $container->factories((new RequestHandlerServiceFactory())());
+    $container->factories((new SlimServiceFactory())());
 
     // always load this service provider last
     // so that the values of other service providers can be overwritten.
-    $container->register(new ConfigServiceProvider(
-        (new ConfigProvider([
-            new DevConfig(__DIR__.'/..'),
-            new PhpunitConfig(__DIR__.'/..'),
-            new ProdConfig(__DIR__.'/..'),
-        ]))->get($env)
-    ));
+    $container->factories((new ConfigServiceFactory((new ConfigProvider([
+        new DevConfig(__DIR__.'/..'),
+        new PhpunitConfig(__DIR__.'/..'),
+        new ProdConfig(__DIR__.'/..'),
+    ]))->get($env)))());
 
     $web = new App(
-        $container['api-http.response.factory'],
-        $container[PsrContainer::class],
-        $container[CallableResolver::class],
-        $container[RouteCollector::class]
+        $container->get('api-http.response.factory'),
+        $container,
+        $container->get(CallableResolverInterface::class),
+        $container->get(RouteCollectorInterface::class)
     );
 
     $web->add(CorsMiddleware::class);
-    $web->addErrorMiddleware($container['debug'], true, true);
+    $web->addErrorMiddleware($container->get('debug'), true, true);
 
     $web->get('/', IndexRequestHandler::class)->setName('index');
     $web->group('/api', function (RouteCollectorProxy $group): void {
