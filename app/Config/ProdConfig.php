@@ -51,6 +51,11 @@ class ProdConfig extends AbstractConfig
                 'path' => $logDir.'/application.log',
                 'level' => Logger::NOTICE,
             ],
+            'oauth2' => [
+                'privateKey' => getenv('OAUTH2_PRIVATE_KEY'),
+                'publicKey' => getenv('OAUTH2_PUBLIC_KEY'),
+                'encryptionKey' => getenv('OAUTH2_ENCRYPTION_KEY'),
+            ],
             'routerCacheFile' => $cacheDir.'/routes.php',
         ];
     }

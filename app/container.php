@@ -10,6 +10,7 @@ use App\ServiceFactory\DoctrineOrmServiceFactory;
 use App\ServiceFactory\FactoryServiceFactory;
 use App\ServiceFactory\MonologServiceFactory;
 use App\ServiceFactory\NegotiationServiceFactory;
+use App\ServiceFactory\OAuth2ServiceFactory;
 use App\ServiceFactory\ProxyManagerServiceFactory;
 use App\ServiceFactory\RepositoryServiceFactory;
 use App\ServiceFactory\SerializationServiceFactory;
@@ -40,6 +41,7 @@ return static function () {
     $container->factories((new FactoryServiceFactory())());
     $container->factories((new MonologServiceFactory())());
     $container->factories((new NegotiationServiceFactory())());
+    $container->factories((new OAuth2ServiceFactory())());
     $container->factories((new ProxyManagerServiceFactory())());
     $container->factories((new RepositoryServiceFactory())());
     $container->factories((new SerializationServiceFactory())());

@@ -16,6 +16,45 @@ services:
       DATABASE_HOST: postgres
       DATABASE_NAME: petstore
       DATABASE_PORT: 5432
+      OAUTH2_PRIVATE_KEY: |
+        -----BEGIN RSA PRIVATE KEY-----
+        MIIEpAIBAAKCAQEA083P+xMeSYCuX/j0agSaCU3WM7wLvTClOteWmjxCgBPTbB+a
+        gzvDdkOc9g9K81rowJg0m9ad6mFNVwgSz5UTSHM3vtWAxcBPFjK7589hVS/eQP6Z
+        ZmMbgVPquYWAuXjrLJG5zdJt00XnbcVzPHfaYCS76+w7Ktjd6QriRlHSWHaOIytx
+        yMXFstH75lussi3biVF8IchCkx/Yc5R21OYVYFFsTt5ysHcbt+cCx4zn8nS0p83f
+        zZrN7CJyDEMaYE4uxgpAJMJQfGgh2VpLzEhd+w/ZaPkXlzouJKwoVgMDBOevI8fk
+        DZZHrsA6FvBjl4Odn9BFVUA72hXRAcpCUn9aCwIDAQABAoIBAQCca5L9ydDEV9Rv
+        7FwVL/DSjjlzW50Py607F5yRq48xJ3Mslup1oN1pqeVxkzm3H5xlIAM6U/Wr8tA7
+        RiseQupKx0yUEvlXEf9WVYGQYQdw8jkhpuWDSA44JNFk0cOPNk34TGb8KjwRm76e
+        wwOn1JviBT8DrSLFMgQw52jUpfjCevK1qO76q20wm1wUFgigRD2EDZgFf7wiVLDp
+        gy/zVTP+DXmJD9nL5TJOvLbla5431u0T/OX+yq9ogatIlI9PmXul8wmvB2sOsE0C
+        NmDHOu5J0imsC/5DnRbGFyeAiFHos1x9q4ZS6+O06jzexJnl+XFl8XPnwG6EaCvF
+        owGyZ0QBAoGBAP1KA7ycyo6VYUmjSovGzJy8IDC5gdEf3AMMxHFg8clb6g7Gy2Zn
+        B9XPj9A0cWNuhaJijOP2NQ5vl4Ij3Zdyc8WMO6BJQkPPJa+RquVR0dOREappNvXe
+        7zTm/5CDZ6QfFBejg7/IMMYxdcO472pf0JkO5FyqIKpirt6yZSKcW2+hAoGBANYS
+        IgNZXx6YBWfKzJjjhqmkmNDDzT9BPtLJovL4M2QIy/KyQRIQZpDeBWrBo7/n7+RC
+        fjOiVQBLc+XzvM5PjVcIpSibAfwkWxiPmeOSRChjumDFFMJC8DKEbypxSRlppjQk
+        ZvzCCr/bJ4Bj64RKTL+DSARLDCe9hgEMCZojxVorAoGBALkNP0eo4dBkUOzk8UzH
+        1KvaQkZ28eJgvXQ4+ri/FEeB8LIVCXvqYG4UtERwXDtB/z5RdBAEzGScoPvCyl2g
+        j/bPaqzDeTdje2wXJ91c9sj0nwx6zF28H9Xtwt/JMYpV7m8K1vHiB8h1UE3Lqpd0
+        I0n/+FW/Mhhp+srXWU59H8yhAoGAXSAaR9azOH3trA9fHgus41PFXtwvB5t8lvo8
+        tvIeeSASiQventsfo1nShXSjpbJie6wpdpDh5XTtgFWeByo4VGpgXt+/505xiqe9
+        zHAu0ltAEyTpOPEhyPgv3AjYQgPh18EWRFKtlnTiJEpThINGC/IyfBuhuBAMoZv4
+        +WMiUW0CgYAOHAxidRuf8udd4PsTWVqxJ6Nf319KHTiXsi+wlRCn2Rfh1VIRYG/M
+        PuaZAiY3ycD5pxxAEEYFifalT/7FfndeCIMVbUtaAs8UQDSk6SCbFbNMMkehjTi5
+        u0kQS+Tuaq36UmvOgkfVEXME+Sb6CvCqDpk1wgdMxfIzNBBsgQrLig==
+        -----END RSA PRIVATE KEY-----
+      OAUTH2_PUBLIC_KEY: |
+        -----BEGIN PUBLIC KEY-----
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA083P+xMeSYCuX/j0agSa
+        CU3WM7wLvTClOteWmjxCgBPTbB+agzvDdkOc9g9K81rowJg0m9ad6mFNVwgSz5UT
+        SHM3vtWAxcBPFjK7589hVS/eQP6ZZmMbgVPquYWAuXjrLJG5zdJt00XnbcVzPHfa
+        YCS76+w7Ktjd6QriRlHSWHaOIytxyMXFstH75lussi3biVF8IchCkx/Yc5R21OYV
+        YFFsTt5ysHcbt+cCx4zn8nS0p83fzZrN7CJyDEMaYE4uxgpAJMJQfGgh2VpLzEhd
+        +w/ZaPkXlzouJKwoVgMDBOevI8fkDZZHrsA6FvBjl4Odn9BFVUA72hXRAcpCUn9a
+        CwIDAQAB
+        -----END PUBLIC KEY-----
+      OAUTH2_ENCRYPTION_KEY: def0000000173da3708fed501e3d64440c1586c15f8f7ee639ae4ee00d74171ef5c87c36f7f078c3d0c00ae768f1f07e05b64598ec897a2abb7f4bc3b12880fdd06d0543
       SSH_AUTH_SOCK: /ssh-agent
     volumes:
       - ./:/var/www/html

@@ -16,6 +16,7 @@
         "chubbyphp/chubbyphp-serialization": "^2.12.1",
         "chubbyphp/chubbyphp-validation": "^3.6.1",
         "doctrine/orm": "^2.7",
+        "league/oauth2-server": "^8.0",
         "monolog/monolog": "^2.0.1",
         "nikic/fast-route": "^1.3",
         "ocramius/proxy-manager": "^2.2.3",
