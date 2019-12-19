@@ -48,8 +48,10 @@ docker-compose up -d
 docker-compose exec php bash
 ```
 
-http://localhost:10080
-https://localhost:10443
+### Urls
+
+* http://localhost:10080
+* https://localhost:10443
 
 ## Installation
 
