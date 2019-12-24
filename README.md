@@ -14,21 +14,21 @@ A simple skeleton to build api's based on the [zend-expressive][1].
 ## Requirements
 
  * php: ^7.2
- * [chubbyphp/chubbyphp-api-http][3]: ^3.3
+ * [chubbyphp/chubbyphp-api-http][3]: ^3.3.1
  * [chubbyphp/chubbyphp-config][4]: ^2.1
  * [chubbyphp/chubbyphp-container][5]: ^1.0
  * [chubbyphp/chubbyphp-cors][6]: ^1.1
- * [chubbyphp/chubbyphp-deserialization][7]: ^2.15
- * [chubbyphp/chubbyphp-doctrine-db-service-provider][8]: ^1.5
- * [chubbyphp/chubbyphp-negotiation][9]: ^1.5
- * [chubbyphp/chubbyphp-serialization][10]: ^2.12
- * [chubbyphp/chubbyphp-validation][11]: ^3.6
+ * [chubbyphp/chubbyphp-deserialization][7]: ^2.15.2
+ * [chubbyphp/chubbyphp-doctrine-db-service-provider][8]: ^1.6
+ * [chubbyphp/chubbyphp-negotiation][9]: ^1.5.1
+ * [chubbyphp/chubbyphp-serialization][10]: ^2.12.2
+ * [chubbyphp/chubbyphp-validation][11]: ^3.7
  * [doctrine/orm][12]: ^2.7
- * [monolog/monolog"][13]: ^2.0.1
+ * [monolog/monolog"][13]: ^2.0.2
  * [ocramius/proxy-manager][14]: ^2.2.3
- * [ramsey/uuid][15]: ^3.8
+ * [ramsey/uuid][15]: ^3.9.2
  * [swagger-api/swagger-ui][16]: ^3.24.3
- * [symfony/console][17]: ^4.4.1|^5.0.1
+ * [symfony/console][17]: ^4.4.2|^5.0.2
  * [zendframework/zend-diactoros][18]: ^2.2.1
  * [zendframework/zend-expressive-fastroute][19]: ^3.0.3
  * [zendframework/zend-expressive][20]: ^3.2.1

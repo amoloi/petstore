@@ -10,6 +10,9 @@ use Zend\Expressive\Router\FastRouteRouter;
 
 class DevConfig extends ProdConfig
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function getConfig(): array
     {
         $config = parent::getConfig();
