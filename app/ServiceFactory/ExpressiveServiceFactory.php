@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\ServiceFactory;
 
 use Psr\Container\ContainerInterface;
-use Zend\Diactoros\Response;
-use Zend\Diactoros\ServerRequestFactory;
+use Slim\Psr7\Factory\ResponseFactory;
+use Slim\Psr7\Factory\ServerRequestFactory;
 use Zend\Expressive\Handler\NotFoundHandler;
 use Zend\Expressive\Middleware\ErrorResponseGenerator;
 use Zend\Expressive\MiddlewareContainer;
@@ -35,12 +35,12 @@ final class ExpressiveServiceFactory
         return [
             'zend.expressive.responseFactory' => static function () {
                 return static function () {
-                    return new Response();
+                    return (new ResponseFactory())->createResponse();
                 };
             },
             'zend.expressive.serverRequestFactory' => static function () {
                 return static function () {
-                    return ServerRequestFactory::fromGlobals();
+                    return (new ServerRequestFactory())->createFromGlobals();
                 };
             },
             MiddlewareFactory::class => static function (ContainerInterface $container) {
