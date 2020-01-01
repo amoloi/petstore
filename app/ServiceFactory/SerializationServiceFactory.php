@@ -27,8 +27,8 @@ use Chubbyphp\Serialization\Encoder\UrlEncodedTypeEncoder;
 use Chubbyphp\Serialization\Encoder\YamlTypeEncoder;
 use Chubbyphp\Serialization\Mapping\CallableNormalizationObjectMapping;
 use Chubbyphp\Serialization\Mapping\NormalizationObjectMappingInterface;
+use Mezzio\Router\RouterInterface;
 use Psr\Container\ContainerInterface;
-use Zend\Expressive\Router\RouterInterface;
 
 final class SerializationServiceFactory
 {

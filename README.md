@@ -1,7 +1,7 @@
 # petstore
 
-[![Build Status](https://api.travis-ci.org/chubbyphp/petstore.png?branch=expressive)](https://travis-ci.org/chubbyphp/petstore)
-[![Coverage Status](https://coveralls.io/repos/github/chubbyphp/petstore/badge.svg?branch=expressive)](https://coveralls.io/github/chubbyphp/petstore?branch=expressive)
+[![Build Status](https://api.travis-ci.org/chubbyphp/petstore.png?branch=mezzio)](https://travis-ci.org/chubbyphp/petstore)
+[![Coverage Status](https://coveralls.io/repos/github/chubbyphp/petstore/badge.svg?branch=mezzio)](https://coveralls.io/github/chubbyphp/petstore?branch=mezzio)
 [![Total Downloads](https://poser.pugx.org/chubbyphp/petstore/downloads.png)](https://packagist.org/packages/chubbyphp/petstore)
 [![Monthly Downloads](https://poser.pugx.org/chubbyphp/petstore/d/monthly)](https://packagist.org/packages/chubbyphp/petstore)
 [![Latest Stable Version](https://poser.pugx.org/chubbyphp/petstore/v/stable.png)](https://packagist.org/packages/chubbyphp/petstore)
@@ -9,7 +9,7 @@
 
 ## Description
 
-A simple skeleton to build api's based on the [zend-expressive][1].
+A simple skeleton to build api's based on the [mezzio][1].
 
 ## Requirements
 
@@ -27,11 +27,11 @@ A simple skeleton to build api's based on the [zend-expressive][1].
  * [monolog/monolog"][13]: ^2.0.2
  * [ocramius/proxy-manager][14]: ^2.2.3
  * [ramsey/uuid][15]: ^3.9.2
- * [swagger-api/swagger-ui][16]: ^3.24.3
- * [symfony/console][17]: ^4.4.2|^5.0.2
- * [zendframework/zend-diactoros][18]: ^2.2.1
- * [zendframework/zend-expressive-fastroute][19]: ^3.0.3
- * [zendframework/zend-expressive][20]: ^3.2.1
+ * [slim/psr7][16]: ^0.6
+ * [swagger-api/swagger-ui][17]: ^3.24.3
+ * [symfony/console][18]: ^4.4.2|^5.0.2
+ * [mezzio/mezzio-fastroute][19]: ^3.0.3
+ * [mezzio/mezzio][20]: ^3.2.1
 
 ## Environment
 
@@ -59,7 +59,7 @@ docker-compose exec php bash
 Through [Composer](http://getcomposer.org) as [chubbyphp/petstore][40].
 
 ```bash
-composer create-project chubbyphp/petstore myproject "dev-expressive"
+composer create-project chubbyphp/petstore myproject "dev-mezzio"
 ```
 
 ## Setup
@@ -124,7 +124,7 @@ Service factories are the glue code of the dependeny injection container.
 
 Dominik Zogg 2019
 
-[1]: https://docs.zendframework.com/zend-expressive/
+[1]: https://docs.mezzio.dev/mezzio
 
 [3]: https://packagist.org/packages/chubbyphp/chubbyphp-api-http
 [4]: https://packagist.org/packages/chubbyphp/chubbyphp-config
@@ -139,11 +139,11 @@ Dominik Zogg 2019
 [13]: https://packagist.org/packages/monolog/monolog
 [14]: https://packagist.org/packages/ocramius/proxy-manager
 [15]: https://packagist.org/packages/ramsey/uuid
-[16]: https://packagist.org/packages/swagger-api/swagger-ui
-[17]: https://packagist.org/packages/symfony/console
-[18]: https://packagist.org/packages/zend-diactoros
-[19]: https://packagist.org/packages/zendframework/zend-expressive-fastroute
-[20]: https://packagist.org/packages/zendframework/zend-expressive
+[16]: https://packagist.org/packages/slim/psr7
+[17]: https://packagist.org/packages/swagger-api/swagger-ui
+[18]: https://packagist.org/packages/symfony/console
+[19]: https://packagist.org/packages/mezzio/mezzio-fastroute
+[20]: https://packagist.org/packages/mezzio/mezzio
 
 [40]: https://packagist.org/packages/chubbyphp/petstore
 

@@ -12,7 +12,7 @@ use Chubbyphp\Serialization\Mapping\NormalizationLinkMapping;
 use Chubbyphp\Serialization\Mapping\NormalizationLinkMappingInterface;
 use Chubbyphp\Serialization\Mapping\NormalizationObjectMappingInterface;
 use Chubbyphp\Serialization\Normalizer\CallbackLinkNormalizer;
-use Zend\Expressive\Router\RouterInterface;
+use Mezzio\Router\RouterInterface;
 
 abstract class AbstractModelMapping implements NormalizationObjectMappingInterface
 {

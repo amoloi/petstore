@@ -7,12 +7,12 @@ namespace App\Tests\Unit\RequestHandler;
 use App\RequestHandler\IndexRequestHandler;
 use Chubbyphp\Mock\Call;
 use Chubbyphp\Mock\MockByCallsTrait;
+use Mezzio\Router\RouterInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Expressive\Router\RouterInterface;
 
 /**
  * @covers \App\RequestHandler\IndexRequestHandler

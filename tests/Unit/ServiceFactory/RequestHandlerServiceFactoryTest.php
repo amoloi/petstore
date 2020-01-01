@@ -27,11 +27,11 @@ use Chubbyphp\Mock\Call;
 use Chubbyphp\Mock\MockByCallsTrait;
 use Chubbyphp\Serialization\SerializerInterface;
 use Chubbyphp\Validation\ValidatorInterface;
+use Mezzio\Router\RouterInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
-use Zend\Expressive\Router\RouterInterface;
 
 /**
  * @covers \App\ServiceFactory\RequestHandlerServiceFactory

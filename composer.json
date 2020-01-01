@@ -1,6 +1,6 @@
 {
     "name": "chubbyphp/petstore",
-    "description": "A simple skeleton to build api's based on the expressive framework.",
+    "description": "A simple skeleton to build api's based on the mezzio framework.",
     "type": "project",
     "license": "MIT",
     "require": {
@@ -22,11 +22,12 @@
         "slim/psr7": "^0.6",
         "swagger-api/swagger-ui": "^3.24.3",
         "symfony/console": "^4.4.2|^5.0.2",
-        "zendframework/zend-expressive-fastroute": "^3.0.3",
-        "zendframework/zend-expressive": "^3.2.1"
+        "mezzio/mezzio-fastroute": "^3.0.3",
+        "mezzio/mezzio": "^3.2.1",
+        "laminas/laminas-dependency-plugin": "^0.2"
     },
     "conflict": {
-        "zendframework/zend-code": "<3.4"
+        "laminas/laminas-code": "<3.4"
     },
     "require-dev": {
         "chubbyphp/chubbyphp-mock": "^1.4.2",
@@ -42,10 +43,14 @@
         "symfony/yaml": "^4.4.2|^5.0.2"
     },
     "autoload": {
-        "psr-4": { "App\\": "app/" }
+        "psr-4": {
+            "App\\": "app/"
+        }
     },
     "autoload-dev": {
-        "psr-4": { "App\\Tests\\": "tests/" }
+        "psr-4": {
+            "App\\Tests\\": "tests/"
+        }
     },
     "config": {
         "sort-packages": true
@@ -75,12 +80,18 @@
             "@test:insights"
         ],
         "test:cs": "mkdir -p build && vendor/bin/php-cs-fixer fix --dry-run --stop-on-violation --cache-file=build/phpcs.cache",
-        "test:infection": "vendor/bin/infection --threads=$(nproc) --min-msi=93 --verbose --coverage=build/phpunit --test-framework-options='--testsuite=Unit'",
+        "test:infection": "vendor/bin/infection --threads=$(nproc) --min-msi=94 --verbose --coverage=build/phpunit --test-framework-options='--testsuite=Unit'",
         "test:insights": "mkdir -p build && bash -c 'vendor/bin/phpinsights analyse -v --no-interaction --min-quality=95 --disable-security-check | tee build/phpinsights.log; if [ ${PIPESTATUS[0]} -ne \"0\" ]; then exit 1; fi'",
         "test:integration": "vendor/bin/phpunit --testsuite=Integration --cache-result-file=build/phpunit/phpunit.result.cache",
         "test:lint": "mkdir -p build && find app tests -name '*.php' -print0 | xargs -0 -n1 -P$(nproc) php -l | tee build/phplint.log",
         "test:loc": "mkdir -p build && vendor/bin/phploc app --verbose | tee build/phploc.log",
         "test:static-analysis": "mkdir -p build && bash -c 'vendor/bin/phpstan analyse app --no-progress --level=7 --error-format=junit | tee build/phpstan.junit.xml; if [ ${PIPESTATUS[0]} -ne \"0\" ]; then exit 1; fi'",
         "test:unit": "phpdbg -qrr vendor/bin/phpunit --testsuite=Unit --coverage-text --coverage-clover=build/phpunit/phpunit.clover.xml --coverage-html=build/phpunit/coverage-html --coverage-xml=build/phpunit/coverage-xml --log-junit=build/phpunit/phpunit.junit.xml --cache-result-file=build/phpunit/phpunit.result.cache"
+    },
+    "repositories": {
+        "laminas": {
+            "type": "composer",
+            "url": "https://laminas.mwop.net/repo/testing"
+        }
     }
 }

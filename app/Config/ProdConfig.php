@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Config;
 
+use Mezzio\Router\FastRouteRouter;
 use Monolog\Logger;
-use Zend\Expressive\Router\FastRouteRouter;
 
 class ProdConfig extends AbstractConfig
 {

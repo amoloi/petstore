@@ -4,47 +4,49 @@ declare(strict_types=1);
 
 namespace App\Tests\Unit\ServiceFactory;
 
-use App\ServiceFactory\ExpressiveServiceFactory;
+use App\ServiceFactory\MezzioServiceFactory;
 use Chubbyphp\Mock\Call;
 use Chubbyphp\Mock\MockByCallsTrait;
+use Laminas\HttpHandlerRunner\Emitter\EmitterStack;
+use Laminas\HttpHandlerRunner\Emitter\SapiEmitter;
+use Laminas\HttpHandlerRunner\RequestHandlerRunner;
+use Laminas\Stratigility\Middleware\ErrorHandler;
+use Laminas\Stratigility\MiddlewarePipeInterface;
+use Mezzio\Handler\NotFoundHandler;
+use Mezzio\MiddlewareFactory;
+use Mezzio\Router\Middleware\DispatchMiddleware;
+use Mezzio\Router\Middleware\MethodNotAllowedMiddleware;
+use Mezzio\Router\Middleware\RouteMiddleware;
+use Mezzio\Router\RouteCollector;
+use Mezzio\Router\RouterInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Expressive\Handler\NotFoundHandler;
-use Zend\Expressive\MiddlewareFactory;
-use Zend\Expressive\Router\Middleware\DispatchMiddleware;
-use Zend\Expressive\Router\Middleware\MethodNotAllowedMiddleware;
-use Zend\Expressive\Router\Middleware\RouteMiddleware;
-use Zend\Expressive\Router\RouteCollector;
-use Zend\Expressive\Router\RouterInterface;
-use Zend\HttpHandlerRunner\RequestHandlerRunner;
-use Zend\Stratigility\Middleware\ErrorHandler;
-use Zend\Stratigility\MiddlewarePipeInterface;
 
 /**
- * @covers \App\ServiceFactory\ExpressiveServiceFactory
+ * @covers \App\ServiceFactory\MezzioServiceFactory
  *
  * @internal
  */
-final class ExpressiveServiceFactoryTest extends TestCase
+final class MezzioServiceFactoryTest extends TestCase
 {
     use MockByCallsTrait;
 
     public function testFactories(): void
     {
-        $factories = (new ExpressiveServiceFactory())();
+        $factories = (new MezzioServiceFactory())();
 
-        self::assertCount(12, $factories);
+        self::assertCount(13, $factories);
     }
 
     public function testResponseFactory(): void
     {
-        $factories = (new ExpressiveServiceFactory())();
+        $factories = (new MezzioServiceFactory())();
 
-        self::assertArrayHasKey('zend.expressive.responseFactory', $factories);
+        self::assertArrayHasKey('mezzio.responseFactory', $factories);
 
-        $responseFactory = $factories['zend.expressive.responseFactory']();
+        $responseFactory = $factories['mezzio.responseFactory']();
 
         self::assertInstanceOf(\Closure::class, $responseFactory);
 
@@ -53,11 +55,11 @@ final class ExpressiveServiceFactoryTest extends TestCase
 
     public function testServerRequestFactory(): void
     {
-        $factories = (new ExpressiveServiceFactory())();
+        $factories = (new MezzioServiceFactory())();
 
-        self::assertArrayHasKey('zend.expressive.serverRequestFactory', $factories);
+        self::assertArrayHasKey('mezzio.serverRequestFactory', $factories);
 
-        $serverRequestFactory = $factories['zend.expressive.serverRequestFactory']();
+        $serverRequestFactory = $factories['mezzio.serverRequestFactory']();
 
         self::assertInstanceOf(\Closure::class, $serverRequestFactory);
 
@@ -69,21 +71,21 @@ final class ExpressiveServiceFactoryTest extends TestCase
         /** @var ContainerInterface $container */
         $container = $this->getMockByCalls(ContainerInterface::class);
 
-        $factories = (new ExpressiveServiceFactory())();
+        $factories = (new MezzioServiceFactory())();
 
         self::assertInstanceOf(MiddlewareFactory::class, $factories[MiddlewareFactory::class]($container));
     }
 
     public function testMiddlewarePipe(): void
     {
-        $factories = (new ExpressiveServiceFactory())();
+        $factories = (new MezzioServiceFactory())();
 
         self::assertInstanceOf(MiddlewarePipeInterface::class, $factories[MiddlewarePipeInterface::class]());
     }
 
     public function testRouter(): void
     {
-        $factories = (new ExpressiveServiceFactory())();
+        $factories = (new MezzioServiceFactory())();
 
         self::assertInstanceOf(RouterInterface::class, $factories[RouterInterface::class]());
     }
@@ -98,9 +100,24 @@ final class ExpressiveServiceFactoryTest extends TestCase
             Call::create('get')->with(RouterInterface::class)->willReturn($router),
         ]);
 
-        $factories = (new ExpressiveServiceFactory())();
+        $factories = (new MezzioServiceFactory())();
 
         self::assertInstanceOf(RouteCollector::class, $factories[RouteCollector::class]($container));
+    }
+
+    public function testEmitterStack(): void
+    {
+        /** @var ContainerInterface $container */
+        $container = $this->getMockByCalls(ContainerInterface::class);
+
+        $factories = (new MezzioServiceFactory())();
+
+        /** @var EmitterStack $emitterStack */
+        $emitterStack = $factories[EmitterStack::class]($container);
+
+        self::assertInstanceOf(EmitterStack::class, $emitterStack);
+
+        self::assertInstanceOf(SapiEmitter::class, $emitterStack->offsetGet($emitterStack->key()));
     }
 
     public function testRequestHandlerRunner(): void
@@ -108,15 +125,19 @@ final class ExpressiveServiceFactoryTest extends TestCase
         /** @var MiddlewarePipeInterface $middlewarePipe */
         $middlewarePipe = $this->getMockByCalls(MiddlewarePipeInterface::class);
 
+        /** @var EmitterStack $emitterStack */
+        $emitterStack = $this->getMockByCalls(EmitterStack::class);
+
         /** @var ContainerInterface $container */
         $container = $this->getMockByCalls(ContainerInterface::class, [
             Call::create('get')->with(MiddlewarePipeInterface::class)->willReturn($middlewarePipe),
-            Call::create('get')->with('zend.expressive.serverRequestFactory')->willReturn(function (): void {}),
-            Call::create('get')->with('zend.expressive.responseFactory')->willReturn(function (): void {}),
+            Call::create('get')->with(EmitterStack::class)->willReturn($emitterStack),
+            Call::create('get')->with('mezzio.serverRequestFactory')->willReturn(function (): void {}),
+            Call::create('get')->with('mezzio.responseFactory')->willReturn(function (): void {}),
             Call::create('get')->with('debug')->willReturn(false),
         ]);
 
-        $factories = (new ExpressiveServiceFactory())();
+        $factories = (new MezzioServiceFactory())();
 
         self::assertInstanceOf(RequestHandlerRunner::class, $factories[RequestHandlerRunner::class]($container));
     }
@@ -125,11 +146,11 @@ final class ExpressiveServiceFactoryTest extends TestCase
     {
         /** @var ContainerInterface $container */
         $container = $this->getMockByCalls(ContainerInterface::class, [
-            Call::create('get')->with('zend.expressive.responseFactory')->willReturn(function (): void {}),
+            Call::create('get')->with('mezzio.responseFactory')->willReturn(function (): void {}),
             Call::create('get')->with('debug')->willReturn(false),
         ]);
 
-        $factories = (new ExpressiveServiceFactory())();
+        $factories = (new MezzioServiceFactory())();
 
         self::assertInstanceOf(ErrorHandler::class, $factories[ErrorHandler::class]($container));
     }
@@ -144,7 +165,7 @@ final class ExpressiveServiceFactoryTest extends TestCase
             Call::create('get')->with(RouterInterface::class)->willReturn($router),
         ]);
 
-        $factories = (new ExpressiveServiceFactory())();
+        $factories = (new MezzioServiceFactory())();
 
         self::assertInstanceOf(RouteMiddleware::class, $factories[RouteMiddleware::class]($container));
     }
@@ -153,10 +174,10 @@ final class ExpressiveServiceFactoryTest extends TestCase
     {
         /** @var ContainerInterface $container */
         $container = $this->getMockByCalls(ContainerInterface::class, [
-            Call::create('get')->with('zend.expressive.responseFactory')->willReturn(function (): void {}),
+            Call::create('get')->with('mezzio.responseFactory')->willReturn(function (): void {}),
         ]);
 
-        $factories = (new ExpressiveServiceFactory())();
+        $factories = (new MezzioServiceFactory())();
 
         self::assertInstanceOf(
             MethodNotAllowedMiddleware::class,
@@ -166,7 +187,7 @@ final class ExpressiveServiceFactoryTest extends TestCase
 
     public function testDispatchMiddleware(): void
     {
-        $factories = (new ExpressiveServiceFactory())();
+        $factories = (new MezzioServiceFactory())();
 
         self::assertInstanceOf(DispatchMiddleware::class, $factories[DispatchMiddleware::class]());
     }
@@ -175,10 +196,10 @@ final class ExpressiveServiceFactoryTest extends TestCase
     {
         /** @var ContainerInterface $container */
         $container = $this->getMockByCalls(ContainerInterface::class, [
-            Call::create('get')->with('zend.expressive.responseFactory')->willReturn(function (): void {}),
+            Call::create('get')->with('mezzio.responseFactory')->willReturn(function (): void {}),
         ]);
 
-        $factories = (new ExpressiveServiceFactory())();
+        $factories = (new MezzioServiceFactory())();
 
         self::assertInstanceOf(
             NotFoundHandler::class,

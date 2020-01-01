@@ -17,8 +17,8 @@ use App\RequestHandler\IndexRequestHandler;
 use App\RequestHandler\PingRequestHandler;
 use App\RequestHandler\Swagger\IndexRequestHandler as SwaggerIndexRequestHandler;
 use App\RequestHandler\Swagger\YamlRequestHandler as SwaggerYamlRequestHandler;
+use Mezzio\Router\RouterInterface;
 use Psr\Container\ContainerInterface;
-use Zend\Expressive\Router\RouterInterface;
 
 final class RequestHandlerServiceFactory
 {

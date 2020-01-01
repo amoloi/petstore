@@ -11,9 +11,9 @@ use Chubbyphp\Mock\MockByCallsTrait;
 use Chubbyphp\Serialization\Mapping\NormalizationFieldMappingBuilder;
 use Chubbyphp\Serialization\Mapping\NormalizationLinkMappingInterface;
 use Chubbyphp\Serialization\Normalizer\NormalizerContextInterface;
+use Mezzio\Router\RouterInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Zend\Expressive\Router\RouterInterface;
 
 /**
  * @covers \App\Mapping\Serialization\AbstractModelMapping

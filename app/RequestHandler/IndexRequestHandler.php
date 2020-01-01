@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\RequestHandler;
 
+use Mezzio\Router\RouterInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Expressive\Router\RouterInterface;
 
 final class IndexRequestHandler implements RequestHandlerInterface
 {

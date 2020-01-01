@@ -17,7 +17,7 @@ use App\RequestHandler\IndexRequestHandler;
 use App\RequestHandler\PingRequestHandler;
 use App\RequestHandler\Swagger\IndexRequestHandler as SwaggerIndexRequestHandler;
 use App\RequestHandler\Swagger\YamlRequestHandler as SwaggerYamlRequestHandler;
-use App\ServiceFactory\ExpressiveServiceFactory;
+use App\ServiceFactory\MezzioServiceFactory;
 use App\ServiceFactory\MiddlewareServiceFactory;
 use App\ServiceFactory\RequestHandlerServiceFactory;
 use Chubbyphp\ApiHttp\Middleware\AcceptAndContentTypeMiddleware;
@@ -25,16 +25,16 @@ use Chubbyphp\Config\ConfigProvider;
 use Chubbyphp\Config\ServiceFactory\ConfigServiceFactory;
 use Chubbyphp\Container\Container;
 use Chubbyphp\Cors\CorsMiddleware;
-use Zend\Expressive\Application;
-use Zend\Expressive\Handler\NotFoundHandler;
-use Zend\Expressive\MiddlewareFactory;
-use Zend\Expressive\Router\Middleware\DispatchMiddleware;
-use Zend\Expressive\Router\Middleware\MethodNotAllowedMiddleware;
-use Zend\Expressive\Router\Middleware\RouteMiddleware;
-use Zend\Expressive\Router\RouteCollector;
-use Zend\HttpHandlerRunner\RequestHandlerRunner;
-use Zend\Stratigility\Middleware\ErrorHandler;
-use Zend\Stratigility\MiddlewarePipeInterface;
+use Laminas\HttpHandlerRunner\RequestHandlerRunner;
+use Laminas\Stratigility\Middleware\ErrorHandler;
+use Laminas\Stratigility\MiddlewarePipeInterface;
+use Mezzio\Application;
+use Mezzio\Handler\NotFoundHandler;
+use Mezzio\MiddlewareFactory;
+use Mezzio\Router\Middleware\DispatchMiddleware;
+use Mezzio\Router\Middleware\MethodNotAllowedMiddleware;
+use Mezzio\Router\Middleware\RouteMiddleware;
+use Mezzio\Router\RouteCollector;
 
 require __DIR__.'/../vendor/autoload.php';
 
@@ -43,7 +43,7 @@ return static function (string $env) {
     $container = (require __DIR__.'/container.php')();
     $container->factories((new MiddlewareServiceFactory())());
     $container->factories((new RequestHandlerServiceFactory())());
-    $container->factories((new ExpressiveServiceFactory())());
+    $container->factories((new MezzioServiceFactory())());
 
     // always load this service provider last
     // so that the values of other service providers can be overwritten.

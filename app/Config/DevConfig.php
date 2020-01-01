@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Config;
 
 use Chubbyphp\Cors\Negotiation\Origin\AllowOriginRegex;
+use Mezzio\Router\FastRouteRouter;
 use Monolog\Logger;
-use Zend\Expressive\Router\FastRouteRouter;
 
 class DevConfig extends ProdConfig
 {

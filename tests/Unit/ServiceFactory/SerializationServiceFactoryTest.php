@@ -29,10 +29,10 @@ use Chubbyphp\Serialization\Encoder\JsonxTypeEncoder;
 use Chubbyphp\Serialization\Encoder\UrlEncodedTypeEncoder;
 use Chubbyphp\Serialization\Encoder\YamlTypeEncoder;
 use Chubbyphp\Serialization\Mapping\CallableNormalizationObjectMapping;
+use Mezzio\Router\RouterInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use Zend\Expressive\Router\RouterInterface;
 
 /**
  * @covers \App\ServiceFactory\SerializationServiceFactory
