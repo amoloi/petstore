@@ -5,7 +5,8 @@ info:
   license:
     name: MIT
 servers:
-  - url: https://localhost:1337
+  - url: https://localhost:10080
+  - url: https://localhost:10443
 paths:
   /api/ping:
     get:
@@ -456,10 +457,13 @@ components:
         tag:
           type: string
           example: 123.456.789
+        vaccination:
+          type: array
+          items:
+            $ref: '#/components/schemas/Vaccination'
     PetResponse:
       type: object
       allOf:
-        - $ref: '#/components/schemas/PetRequest'
         - type: object
           properties:
             id:
@@ -474,6 +478,9 @@ components:
               type: string
               format: datetime
               example: '2018-10-06T09:00:00+02:00'
+        - $ref: '#/components/schemas/PetRequest'
+        - type: object
+          properties:
             _links:
               type: object
               properties:
@@ -590,3 +597,9 @@ components:
         _type:
           type: string
           example: petCollection
+    Vaccination:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Rabies

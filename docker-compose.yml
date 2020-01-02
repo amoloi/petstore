@@ -56,14 +56,24 @@ services:
         -----END PUBLIC KEY-----
       OAUTH2_ENCRYPTION_KEY: def0000000173da3708fed501e3d64440c1586c15f8f7ee639ae4ee00d74171ef5c87c36f7f078c3d0c00ae768f1f07e05b64598ec897a2abb7f4bc3b12880fdd06d0543
       SSH_AUTH_SOCK: /ssh-agent
+      BLACKFIRE_CLIENT_ID: ${BLACKFIRE_CLIENT_ID}
+      BLACKFIRE_CLIENT_TOKEN: ${BLACKFIRE_CLIENT_TOKEN}
     volumes:
       - ./:/var/www/html
       - ~/.bash_aliases:/var/www/.bash_aliases
       - ~/.bash_history:/var/www/.bash_history
       - ~/.gitconfig:/var/www/.gitconfig
+      - ~/.gitignore:/var/www/.gitignore
       - $SSH_AUTH_SOCK:/ssh-agent
     depends_on:
       - postgres
+  blackfire:
+    container_name: petstore-blackfire
+    hostname: petstore-blackfire
+    image: blackfire/blackfire
+    environment:
+      BLACKFIRE_SERVER_ID: ${BLACKFIRE_SERVER_ID}
+      BLACKFIRE_SERVER_TOKEN: ${BLACKFIRE_SERVER_TOKEN}
   postgres:
     container_name: petstore-postgres
     hostname: pestore-postgres
@@ -78,7 +88,8 @@ services:
       dockerfile: ./prod/nginx/Dockerfile
       context: ./docker
     ports:
-      - "1337:443"
+      - "10080:80"
+      - "10443:443"
     volumes:
       - ./:/var/www/html
     depends_on:
