@@ -121,7 +121,7 @@ Service factories are the glue code of the dependeny injection container.
 
 ## Copyright
 
-Dominik Zogg 2019
+Dominik Zogg 2020
 
 [1]: https://www.slimframework.com
 
