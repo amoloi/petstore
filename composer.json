@@ -18,8 +18,8 @@
         "monolog/monolog": "^2.0.2",
         "ocramius/proxy-manager": "^2.2.3",
         "ramsey/uuid": "^3.9.2",
-        "slim/psr7": "^0.6",
-        "slim/slim": "^4.3",
+        "slim/psr7": "^1.0",
+        "slim/slim": "^4.4",
         "swagger-api/swagger-ui": "^3.24.3",
         "symfony/console": "^4.4.2|^5.0.2"
     },
