@@ -138,8 +138,8 @@ Dominik Zogg 2020
 [13]: https://packagist.org/packages/monolog/monolog
 [14]: https://packagist.org/packages/ocramius/proxy-manager
 [15]: https://packagist.org/packages/ramsey/uuid
-[16]: https://packagist.org/packages/slim/slim
-[17]: https://packagist.org/packages/slim/psr7
+[16]: https://packagist.org/packages/slim/psr7
+[17]: https://packagist.org/packages/slim/slim
 [18]: https://packagist.org/packages/swagger-api/swagger-ui
 [19]: https://packagist.org/packages/symfony/console
 
