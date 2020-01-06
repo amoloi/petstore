@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
+use Peak\Http\Response\Emitter;
 use Slim\Psr7\Factory\ServerRequestFactory;
 
-/** @var Chubbyphp\Framework\Application $web */
-$web = (require __DIR__ . '/../app/web.php')(getenv('APP_ENV'));
-$web->send($web->handle((new ServerRequestFactory())->createFromGlobals()));
+/** @var Peak\Http\Stack $stack */
+$stack = (require __DIR__ . '/../app/web.php')(getenv('APP_ENV'));
+(new Emitter())->emit($stack->handle((new ServerRequestFactory())->createFromGlobals()));

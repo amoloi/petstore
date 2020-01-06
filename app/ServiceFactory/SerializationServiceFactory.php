@@ -21,7 +21,6 @@ use Chubbyphp\ApiHttp\Serialization\ApiProblem\ClientError\NotAcceptableMapping;
 use Chubbyphp\ApiHttp\Serialization\ApiProblem\ClientError\NotFoundMapping;
 use Chubbyphp\ApiHttp\Serialization\ApiProblem\ClientError\UnprocessableEntityMapping;
 use Chubbyphp\ApiHttp\Serialization\ApiProblem\ClientError\UnsupportedMediaTypeMapping;
-use Chubbyphp\Framework\Router\RouterInterface;
 use Chubbyphp\Serialization\Encoder\JsonTypeEncoder;
 use Chubbyphp\Serialization\Encoder\JsonxTypeEncoder;
 use Chubbyphp\Serialization\Encoder\UrlEncodedTypeEncoder;
@@ -53,8 +52,8 @@ final class SerializationServiceFactory
                     BadRequest::class => new MappingConfig(BadRequestMapping::class),
                     NotAcceptable::class => new MappingConfig(NotAcceptableMapping::class),
                     NotFound::class => new MappingConfig(NotFoundMapping::class),
-                    Pet::class => new MappingConfig(PetMapping::class, [RouterInterface::class]),
-                    PetCollection::class => new MappingConfig(PetCollectionMapping::class, [RouterInterface::class]),
+                    Pet::class => new MappingConfig(PetMapping::class),
+                    PetCollection::class => new MappingConfig(PetCollectionMapping::class),
                     UnprocessableEntity::class => new MappingConfig(UnprocessableEntityMapping::class),
                     UnsupportedMediaType::class => new MappingConfig(UnsupportedMediaTypeMapping::class),
                     Vaccination::class => new MappingConfig(VaccinationMapping::class),

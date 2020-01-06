@@ -17,7 +17,6 @@ use App\RequestHandler\IndexRequestHandler;
 use App\RequestHandler\PingRequestHandler;
 use App\RequestHandler\Swagger\IndexRequestHandler as SwaggerIndexRequestHandler;
 use App\RequestHandler\Swagger\YamlRequestHandler as SwaggerYamlRequestHandler;
-use Chubbyphp\Framework\Router\RouterInterface;
 use Psr\Container\ContainerInterface;
 
 final class RequestHandlerServiceFactory
@@ -80,8 +79,7 @@ final class RequestHandlerServiceFactory
             },
             IndexRequestHandler::class => static function (ContainerInterface $container) {
                 return new IndexRequestHandler(
-                    $container->get('api-http.response.factory'),
-                    $container->get(RouterInterface::class)
+                    $container->get('api-http.response.factory')
                 );
             },
             PingRequestHandler::class => static function (ContainerInterface $container) {
