@@ -8,7 +8,7 @@ use App\Config\DevConfig;
 use App\Config\PhpunitConfig;
 use App\Config\ProdConfig;
 use App\Model\Pet;
-use App\Peak\LazyRequestHandler;
+use App\Peak\HandlerResolver;
 use App\Peak\Route;
 use App\RequestHandler\Crud\CreateRequestHandler;
 use App\RequestHandler\Crud\DeleteRequestHandler;
@@ -26,7 +26,6 @@ use Chubbyphp\Config\ConfigProvider;
 use Chubbyphp\Config\ServiceFactory\ConfigServiceFactory;
 use Chubbyphp\Container\Container;
 use Chubbyphp\Cors\CorsMiddleware;
-use Peak\Http\Request\HandlerResolver;
 use Peak\Http\Request\PreRoute;
 use Peak\Http\Stack;
 
@@ -46,32 +45,26 @@ return static function (string $env) {
         new ProdConfig(__DIR__.'/..'),
     ]))->get($env)))());
 
-    $handlerResolver = new HandlerResolver($container);
-
-    $petList = new LazyRequestHandler($container, ListRequestHandler::class.Pet::class);
-    $petCreate = new LazyRequestHandler($container, CreateRequestHandler::class.Pet::class);
-    $petRead = new LazyRequestHandler($container, ReadRequestHandler::class.Pet::class);
-    $petUpdate = new LazyRequestHandler($container, UpdateRequestHandler::class.Pet::class);
-    $petDelete = new LazyRequestHandler($container, DeleteRequestHandler::class.Pet::class);
+    $hr = new HandlerResolver($container);
 
     return new Stack([
         CorsMiddleware::class,
-        new Route('GET', '/', new Stack([IndexRequestHandler::class], $handlerResolver)),
+        new Route('GET', '/', new Stack([IndexRequestHandler::class], $hr)),
         new PreRoute('/api', new Stack([
-            new Route('GET', '/api', new Stack([SwaggerIndexRequestHandler::class], $handlerResolver)),
-            new Route('GET', '/api/swagger', new Stack([SwaggerYamlRequestHandler::class], $handlerResolver)),
+            new Route('GET', '/api', new Stack([SwaggerIndexRequestHandler::class], $hr)),
+            new Route('GET', '/api/swagger', new Stack([SwaggerYamlRequestHandler::class], $hr)),
             new Route('GET', '/api/ping', new Stack([
                 AcceptAndContentTypeMiddleware::class,
                 PingRequestHandler::class,
-            ], $handlerResolver)),
+            ], $hr)),
             new PreRoute('/api/pets', new Stack([
                 AcceptAndContentTypeMiddleware::class,
-                new Route('GET', '/api/pets', new Stack([$petList], $handlerResolver)),
-                new Route('POST', '/api/pets', new Stack([$petCreate], $handlerResolver)),
-                new Route('GET', '/api/pets/{id}', new Stack([$petRead], $handlerResolver)),
-                new Route('PUT', '/api/pets/{id}', new Stack([$petUpdate], $handlerResolver)),
-                new Route('DELETE', '/api/pets/{id}', new Stack([$petDelete], $handlerResolver)),
-            ], $handlerResolver)),
-        ], $handlerResolver)),
-    ], $handlerResolver);
+                new Route('GET', '/api/pets', new Stack([ListRequestHandler::class.Pet::class], $hr)),
+                new Route('POST', '/api/pets', new Stack([CreateRequestHandler::class.Pet::class], $hr)),
+                new Route('GET', '/api/pets/{id}', new Stack([ReadRequestHandler::class.Pet::class], $hr)),
+                new Route('PUT', '/api/pets/{id}', new Stack([UpdateRequestHandler::class.Pet::class], $hr)),
+                new Route('DELETE', '/api/pets/{id}', new Stack([DeleteRequestHandler::class.Pet::class], $hr)),
+            ], $hr)),
+        ], $hr)),
+    ], $hr);
 };
