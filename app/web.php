@@ -9,7 +9,6 @@ use App\Config\PhpunitConfig;
 use App\Config\ProdConfig;
 use App\Model\Pet;
 use App\Peak\HandlerResolver;
-use App\Peak\Route;
 use App\RequestHandler\Crud\CreateRequestHandler;
 use App\RequestHandler\Crud\DeleteRequestHandler;
 use App\RequestHandler\Crud\ListRequestHandler;
@@ -27,6 +26,7 @@ use Chubbyphp\Config\ServiceFactory\ConfigServiceFactory;
 use Chubbyphp\Container\Container;
 use Chubbyphp\Cors\CorsMiddleware;
 use Peak\Http\Request\PreRoute;
+use Peak\Http\Request\Route;
 use Peak\Http\Stack;
 
 require __DIR__.'/../vendor/autoload.php';
