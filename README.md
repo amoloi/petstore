@@ -141,7 +141,7 @@ Dominik Zogg 2020
 [11]: https://packagist.org/packages/chubbyphp/chubbyphp-validation
 [12]: https://packagist.org/packages/doctrine/orm
 [13]: https://packagist.org/packages/mezzio/mezzio-fastroute
-[24]: https://packagist.org/packages/mezzio/mezzio
+[14]: https://packagist.org/packages/mezzio/mezzio
 [15]: https://packagist.org/packages/monolog/monolog
 [16]: https://packagist.org/packages/ocramius/proxy-manager
 [17]: https://packagist.org/packages/ramsey/uuid
