@@ -18,7 +18,7 @@
         "monolog/monolog": "^2.0.2",
         "nikic/fast-route": "^1.3",
         "ocramius/proxy-manager": "^2.2.3",
-        "peak/http": "^4.1.2",
+        "peak/bedrock": "^4.2",
         "ramsey/uuid": "^3.9.2",
         "slim/psr7": "^1.0",
         "swagger-api/swagger-ui": "^3.24.3",

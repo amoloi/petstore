@@ -25,9 +25,8 @@ use Chubbyphp\Config\ConfigProvider;
 use Chubbyphp\Config\ServiceFactory\ConfigServiceFactory;
 use Chubbyphp\Container\Container;
 use Chubbyphp\Cors\CorsMiddleware;
-use Peak\Http\Request\PreRoute;
-use Peak\Http\Request\Route;
-use Peak\Http\Stack;
+use Peak\Bedrock\Http\Application;
+use Peak\Bedrock\Kernel;
 
 require __DIR__.'/../vendor/autoload.php';
 
@@ -45,26 +44,32 @@ return static function (string $env) {
         new ProdConfig(__DIR__.'/..'),
     ]))->get($env)))());
 
-    $hr = new HandlerResolver($container);
+    $app = new Application(
+        new Kernel($env, $container),
+        new HandlerResolver($container)
+    );
 
-    return new Stack([
-        CorsMiddleware::class,
-        new Route('GET', '/', new Stack([IndexRequestHandler::class], $hr)),
-        new PreRoute('/api', new Stack([
-            new Route('GET', '/api', new Stack([SwaggerIndexRequestHandler::class], $hr)),
-            new Route('GET', '/api/swagger', new Stack([SwaggerYamlRequestHandler::class], $hr)),
-            new Route('GET', '/api/ping', new Stack([
-                AcceptAndContentTypeMiddleware::class,
-                PingRequestHandler::class,
-            ], $hr)),
-            new PreRoute('/api/pets', new Stack([
-                AcceptAndContentTypeMiddleware::class,
-                new Route('GET', '/api/pets', new Stack([ListRequestHandler::class.Pet::class], $hr)),
-                new Route('POST', '/api/pets', new Stack([CreateRequestHandler::class.Pet::class], $hr)),
-                new Route('GET', '/api/pets/{id}', new Stack([ReadRequestHandler::class.Pet::class], $hr)),
-                new Route('PUT', '/api/pets/{id}', new Stack([UpdateRequestHandler::class.Pet::class], $hr)),
-                new Route('DELETE', '/api/pets/{id}', new Stack([DeleteRequestHandler::class.Pet::class], $hr)),
-            ], $hr)),
-        ], $hr)),
-    ], $hr);
+    $app
+        ->stack(CorsMiddleware::class)
+        ->get('', IndexRequestHandler::class)
+        ->group('/api', function() use ($app) {
+            $app
+                ->get('', SwaggerIndexRequestHandler::class)
+                ->get('/swagger', SwaggerYamlRequestHandler::class)
+                ->get('/ping', [
+                    AcceptAndContentTypeMiddleware::class,
+                    PingRequestHandler::class,
+                ])
+                ->group('/pets', function() use ($app) {
+                    $app
+                        ->stack(AcceptAndContentTypeMiddleware::class)
+                        ->get('', ListRequestHandler::class.Pet::class)
+                        ->post('', CreateRequestHandler::class.Pet::class)
+                        ->get('/{id}', ReadRequestHandler::class.Pet::class)
+                        ->put('/{id}', UpdateRequestHandler::class.Pet::class)
+                        ->delete('/{id}', DeleteRequestHandler::class.Pet::class);
+                });
+        });
+
+    return $app;
 };
