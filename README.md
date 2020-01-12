@@ -1,11 +1,7 @@
 # petstore
 
-[![Build Status](https://api.travis-ci.org/chubbyphp/petstore.png?branch=chubbyphp-framework)](https://travis-ci.org/chubbyphp/petstore)
-[![Coverage Status](https://coveralls.io/repos/github/chubbyphp/petstore/badge.svg?branch=chubbyphp-framework)](https://coveralls.io/github/chubbyphp/petstore?branch=chubbyphp-framework)
-[![Total Downloads](https://poser.pugx.org/chubbyphp/petstore/downloads.png)](https://packagist.org/packages/chubbyphp/petstore)
-[![Monthly Downloads](https://poser.pugx.org/chubbyphp/petstore/d/monthly)](https://packagist.org/packages/chubbyphp/petstore)
-[![Latest Stable Version](https://poser.pugx.org/chubbyphp/petstore/v/stable.png)](https://packagist.org/packages/chubbyphp/petstore)
-[![Latest Unstable Version](https://poser.pugx.org/chubbyphp/petstore/v/unstable)](https://packagist.org/packages/chubbyphp/petstore)
+[![Build Status](https://api.travis-ci.org/chubbyphp/petstore.png?branch=peakphp)](https://travis-ci.org/chubbyphp/petstore)
+[![Coverage Status](https://coveralls.io/repos/github/chubbyphp/petstore/badge.svg?branch=peakphp)](https://coveralls.io/github/chubbyphp/petstore?branch=peakphp)
 
 ## Description
 
