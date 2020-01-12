@@ -9,7 +9,7 @@
 
 ## Description
 
-A simple skeleton to build api's based on the [chubbyphp-framework][1].
+A simple skeleton to build api's based on the [peakphp][1].
 
 ## Requirements
 
@@ -20,14 +20,14 @@ A simple skeleton to build api's based on the [chubbyphp-framework][1].
  * [chubbyphp/chubbyphp-cors][6]: ^1.1
  * [chubbyphp/chubbyphp-deserialization][7]: ^2.15.2
  * [chubbyphp/chubbyphp-doctrine-db-service-provider][8]: ^1.6
- * [chubbyphp/chubbyphp-framework][9]: ^2.6
- * [chubbyphp/chubbyphp-negotiation][10]: ^1.5.1
- * [chubbyphp/chubbyphp-serialization][11]: ^2.12.2
- * [chubbyphp/chubbyphp-validation][12]: ^3.7
- * [doctrine/orm][13]: ^2.7
- * [monolog/monolog][14]: ^2.0.2
- * [nikic/fast-route][15]: ^1.3
- * [ocramius/proxy-manager][16]: ^2.2.3
+ * [chubbyphp/chubbyphp-negotiation][9]: ^1.5.1
+ * [chubbyphp/chubbyphp-serialization][10]: ^2.12.2
+ * [chubbyphp/chubbyphp-validation][11]: ^3.7
+ * [doctrine/orm][12]: ^2.7
+ * [monolog/monolog][13]: ^2.0.2
+ * [nikic/fast-route][14]: ^1.3
+ * [ocramius/proxy-manager][15]: ^2.2.3
+ * [peak/bedrock][16]: ^4.2
  * [ramsey/uuid][17]: ^3.9.2
  * [slim/psr7][18]: ^1.0
  * [swagger-api/swagger-ui][19]: ^3.24.3
@@ -63,7 +63,7 @@ docker-compose exec php bash
 Through [Composer](http://getcomposer.org) as [chubbyphp/petstore][40].
 
 ```bash
-composer create-project chubbyphp/petstore myproject "dev-chubbyphp-framework"
+composer create-project chubbyphp/petstore myproject "dev-peakphp"
 ```
 
 ## Setup
@@ -128,7 +128,7 @@ Service factories are the glue code of the dependeny injection container.
 
 Dominik Zogg 2020
 
-[1]: https://github.com/chubbyphp/chubbyphp-framework
+[1]: https://github.com/peakphp/bedrock
 
 [3]: https://packagist.org/packages/chubbyphp/chubbyphp-api-http
 [4]: https://packagist.org/packages/chubbyphp/chubbyphp-config
@@ -136,14 +136,15 @@ Dominik Zogg 2020
 [6]: https://packagist.org/packages/chubbyphp/chubbyphp-cors
 [7]: https://packagist.org/packages/chubbyphp/chubbyphp-deserialization
 [8]: https://packagist.org/packages/chubbyphp/chubbyphp-doctrine-db-service-provider
-[9]: https://packagist.org/packages/chubbyphp/chubbyphp-framework
-[10]: https://packagist.org/packages/chubbyphp/chubbyphp-negotiation
-[11]: https://packagist.org/packages/chubbyphp/chubbyphp-serialization
-[12]: https://packagist.org/packages/chubbyphp/chubbyphp-validation
-[13]: https://packagist.org/packages/doctrine/orm
-[14]: https://packagist.org/packages/monolog/monolog
-[15]: https://packagist.org/packages/nikic/fast-route
-[16]: https://packagist.org/packages/ocramius/proxy-manager
+[9]: https://packagist.org/packages/chubbyphp/chubbyphp-negotiation
+[10]: https://packagist.org/packages/chubbyphp/chubbyphp-serialization
+[11]: https://packagist.org/packages/chubbyphp/chubbyphp-validation
+[12]: https://packagist.org/packages/doctrine/orm
+[13]: https://packagist.org/packages/monolog/monolog
+[14]: https://packagist.org/packages/nikic/fast-route
+[15]: https://packagist.org/packages/ocramius/proxy-manager
+[16]: https://packagist.org/packages/
+
 [17]: https://packagist.org/packages/ramsey/uuid
 [18]: https://packagist.org/packages/slim/psr7
 [19]: https://packagist.org/packages/swagger-api/swagger-ui
