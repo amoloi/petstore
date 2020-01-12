@@ -139,8 +139,7 @@ Dominik Zogg 2020
 [13]: https://packagist.org/packages/monolog/monolog
 [14]: https://packagist.org/packages/nikic/fast-route
 [15]: https://packagist.org/packages/ocramius/proxy-manager
-[16]: https://packagist.org/packages/
-
+[16]: https://packagist.org/packages/peak/bedrock
 [17]: https://packagist.org/packages/ramsey/uuid
 [18]: https://packagist.org/packages/slim/psr7
 [19]: https://packagist.org/packages/swagger-api/swagger-ui
