@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\ServiceFactory;
 
 use Monolog\Formatter\LogstashFormatter;
+use Monolog\Handler\BufferHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Psr\Container\ContainerInterface;
@@ -22,10 +23,12 @@ final class MonologServiceFactory
                 $monolog = $container->get('monolog');
 
                 return new Logger($monolog['name'], [
-                    (new StreamHandler(
-                        $monolog['path'],
-                        $monolog['level']
-                    ))->setFormatter(new LogstashFormatter('app')),
+                    new BufferHandler(
+                        (new StreamHandler(
+                            $monolog['path'],
+                            $monolog['level']
+                        ))->setFormatter(new LogstashFormatter('app'))
+                    ),
                 ]);
             },
             'logger' => static function (ContainerInterface $container) {

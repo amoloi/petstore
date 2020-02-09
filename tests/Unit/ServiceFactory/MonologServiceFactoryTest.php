@@ -8,6 +8,7 @@ use App\ServiceFactory\MonologServiceFactory;
 use Chubbyphp\Mock\Call;
 use Chubbyphp\Mock\MockByCallsTrait;
 use Monolog\Formatter\LogstashFormatter;
+use Monolog\Handler\BufferHandler;
 use Monolog\Handler\Handler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
@@ -52,13 +53,21 @@ final class MonologServiceFactoryTest extends TestCase
 
         self::assertInstanceOf(Logger::class, $logger);
 
-        /** @var array<int, Handler> $logger */
+        /** @var array<int, Handler> $handlers */
         $handlers = $logger->getHandlers();
 
         self::assertCount(1, $handlers);
 
+        /** @var BufferHandler $bufferedHandler */
+        $bufferedHandler = array_shift($handlers);
+
+        self::assertInstanceOf(BufferHandler::class, $bufferedHandler);
+
+        $handlerReflectionProperty = new \ReflectionProperty($bufferedHandler, 'handler');
+        $handlerReflectionProperty->setAccessible(true);
+
         /** @var StreamHandler $streamHandler */
-        $streamHandler = array_shift($handlers);
+        $streamHandler = $handlerReflectionProperty->getValue($bufferedHandler);
 
         self::assertInstanceOf(StreamHandler::class, $streamHandler);
 
