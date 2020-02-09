@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Tests\Unit\RequestHandler;
 
 use App\RequestHandler\IndexRequestHandler;
-use Chubbyphp\Framework\Router\RouterInterface;
 use Chubbyphp\Mock\Call;
 use Chubbyphp\Mock\MockByCallsTrait;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -30,7 +29,7 @@ final class IndexRequestHandlerTest extends TestCase
 
         /** @var ResponseInterface|MockObject $response */
         $response = $this->getMockByCalls(ResponseInterface::class, [
-            Call::create('withHeader')->with('Location', 'https://petstore/api')->willReturnSelf(),
+            Call::create('withHeader')->with('Location', '/api')->willReturnSelf(),
         ]);
 
         /** @var ResponseFactoryInterface|MockObject $responseFactory */
@@ -38,12 +37,7 @@ final class IndexRequestHandlerTest extends TestCase
             Call::create('createResponse')->with(302, '')->willReturn($response),
         ]);
 
-        /** @var RouterInterface|MockObject $router */
-        $router = $this->getMockByCalls(RouterInterface::class, [
-            Call::create('generateUrl')->with($request, 'swagger_index', [], [])->willReturn('https://petstore/api'),
-        ]);
-
-        $requestHandler = new IndexRequestHandler($responseFactory, $router);
+        $requestHandler = new IndexRequestHandler($responseFactory);
 
         self::assertSame($response, $requestHandler->handle($request));
     }

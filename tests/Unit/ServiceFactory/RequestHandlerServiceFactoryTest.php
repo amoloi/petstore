@@ -23,7 +23,6 @@ use App\RequestHandler\Swagger\YamlRequestHandler as SwaggerYamlRequestHandler;
 use App\ServiceFactory\RequestHandlerServiceFactory;
 use Chubbyphp\ApiHttp\Manager\RequestManagerInterface;
 use Chubbyphp\ApiHttp\Manager\ResponseManagerInterface;
-use Chubbyphp\Framework\Router\RouterInterface;
 use Chubbyphp\Mock\Call;
 use Chubbyphp\Mock\MockByCallsTrait;
 use Chubbyphp\Serialization\SerializerInterface;
@@ -254,13 +253,9 @@ final class RequestHandlerServiceFactoryTest extends TestCase
         /** @var ResponseFactoryInterface|MockObject $responseFactory */
         $responseFactory = $this->getMockByCalls(ResponseFactoryInterface::class);
 
-        /** @var RouterInterface|MockObject $router */
-        $router = $this->getMockByCalls(RouterInterface::class);
-
         /** @var ContainerInterface|MockObject $container */
         $container = $this->getMockByCalls(ContainerInterface::class, [
             Call::create('get')->with('api-http.response.factory')->willReturn($responseFactory),
-            Call::create('get')->with(RouterInterface::class)->willReturn($router),
         ]);
 
         $factories = (new RequestHandlerServiceFactory())();

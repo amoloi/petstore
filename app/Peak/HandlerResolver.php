@@ -6,10 +6,9 @@ namespace App\Peak;
 
 use Peak\Http\Request\HandlerResolver as BaseHandlerResolver;
 
-class HandlerResolver extends BaseHandlerResolver
+final class HandlerResolver extends BaseHandlerResolver
 {
     /**
-     * @param string $handler
      * @return mixed
      */
     protected function resolveString(string $handler)

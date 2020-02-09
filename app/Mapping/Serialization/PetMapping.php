@@ -32,19 +32,4 @@ final class PetMapping extends AbstractModelMapping
 
         return $normalizationFieldMappings;
     }
-
-    protected function getReadRouteName(): string
-    {
-        return 'pet_read';
-    }
-
-    protected function getUpdateRouteName(): string
-    {
-        return 'pet_update';
-    }
-
-    protected function getDeleteRouteName(): string
-    {
-        return 'pet_delete';
-    }
 }

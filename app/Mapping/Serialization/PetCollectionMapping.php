@@ -17,14 +17,4 @@ final class PetCollectionMapping extends AbstractCollectionMapping
     {
         return 'petCollection';
     }
-
-    protected function getListRouteName(): string
-    {
-        return 'pet_list';
-    }
-
-    protected function getCreateRouteName(): string
-    {
-        return 'pet_create';
-    }
 }

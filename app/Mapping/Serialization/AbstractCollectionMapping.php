@@ -42,8 +42,4 @@ abstract class AbstractCollectionMapping implements NormalizationObjectMappingIn
     {
         return [];
     }
-
-    abstract protected function getListRouteName(): string;
-
-    abstract protected function getCreateRouteName(): string;
 }

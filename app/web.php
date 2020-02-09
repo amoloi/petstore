@@ -52,7 +52,7 @@ return static function (string $env) {
     $app
         ->stack(CorsMiddleware::class)
         ->get('', IndexRequestHandler::class)
-        ->group('/api', function() use ($app) {
+        ->group('/api', function () use ($app): void {
             $app
                 ->get('', SwaggerIndexRequestHandler::class)
                 ->get('/swagger', SwaggerYamlRequestHandler::class)
@@ -60,16 +60,19 @@ return static function (string $env) {
                     AcceptAndContentTypeMiddleware::class,
                     PingRequestHandler::class,
                 ])
-                ->group('/pets', function() use ($app) {
+                ->group('/pets', function () use ($app): void {
                     $app
                         ->stack(AcceptAndContentTypeMiddleware::class)
                         ->get('', ListRequestHandler::class.Pet::class)
                         ->post('', CreateRequestHandler::class.Pet::class)
                         ->get('/{id}', ReadRequestHandler::class.Pet::class)
                         ->put('/{id}', UpdateRequestHandler::class.Pet::class)
-                        ->delete('/{id}', DeleteRequestHandler::class.Pet::class);
-                });
-        });
+                        ->delete('/{id}', DeleteRequestHandler::class.Pet::class)
+                    ;
+                })
+            ;
+        })
+    ;
 
     return $app;
 };

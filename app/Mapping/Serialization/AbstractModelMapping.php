@@ -38,10 +38,4 @@ abstract class AbstractModelMapping implements NormalizationObjectMappingInterfa
     {
         return [];
     }
-
-    abstract protected function getReadRouteName(): string;
-
-    abstract protected function getUpdateRouteName(): string;
-
-    abstract protected function getDeleteRouteName(): string;
 }
