@@ -59,8 +59,8 @@ return static function (string $env) {
 
     $web->get('/', IndexRequestHandler::class)->setName('index');
     $web->group('/api', function (RouteCollectorProxy $group): void {
-        $group->get('', SwaggerIndexRequestHandler::class)->setName('swagger_index');
-        $group->get('/swagger', SwaggerYamlRequestHandler::class)->setName('swagger_yml');
+        $group->get('/swagger/index', SwaggerIndexRequestHandler::class)->setName('swagger_index');
+        $group->get('/swagger/yml', SwaggerYamlRequestHandler::class)->setName('swagger_yml');
         $group->get('/ping', PingRequestHandler::class)->setName('ping')->add(AcceptAndContentTypeMiddleware::class);
         $group->group('/pets', function (RouteCollectorProxy $group): void {
             $group->get('', ListRequestHandler::class.Pet::class)->setName('pet_list');
