@@ -24,7 +24,7 @@ final class IndexRequestHandler implements RequestHandlerInterface
     public function handle(ServerRequestInterface $request): ResponseInterface
     {
         return $this->responseFactory->createResponse(302)
-            ->withHeader('Location', '/api')
+            ->withHeader('Location', '/api/swagger/index')
         ;
     }
 }

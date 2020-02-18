@@ -54,8 +54,8 @@ return static function (string $env) {
         ->get('', IndexRequestHandler::class)
         ->group('/api', function () use ($app): void {
             $app
-                ->get('', SwaggerIndexRequestHandler::class)
-                ->get('/swagger', SwaggerYamlRequestHandler::class)
+                ->get('/swagger/index', SwaggerIndexRequestHandler::class)
+                ->get('/swagger/yml', SwaggerYamlRequestHandler::class)
                 ->get('/ping', [
                     AcceptAndContentTypeMiddleware::class,
                     PingRequestHandler::class,

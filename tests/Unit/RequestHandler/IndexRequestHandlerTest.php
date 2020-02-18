@@ -29,7 +29,7 @@ final class IndexRequestHandlerTest extends TestCase
 
         /** @var ResponseInterface|MockObject $response */
         $response = $this->getMockByCalls(ResponseInterface::class, [
-            Call::create('withHeader')->with('Location', '/api')->willReturnSelf(),
+            Call::create('withHeader')->with('Location', '/api/swagger/index')->willReturnSelf(),
         ]);
 
         /** @var ResponseFactoryInterface|MockObject $responseFactory */
