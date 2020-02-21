@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace App\ServiceFactory;
 
+use App\Middleware\JaegerMiddleware;
 use Chubbyphp\ApiHttp\Middleware\AcceptAndContentTypeMiddleware;
 use Chubbyphp\Cors\CorsMiddleware;
 use Chubbyphp\Cors\Negotiation\HeadersNegotiator;
 use Chubbyphp\Cors\Negotiation\MethodNegotiator;
 use Chubbyphp\Cors\Negotiation\Origin\OriginNegotiator;
+use Jaeger\Config;
 use Psr\Container\ContainerInterface;
 
 final class MiddlewareServiceFactory
@@ -30,6 +32,7 @@ final class MiddlewareServiceFactory
                 $cors = $container->get('cors');
 
                 $allowOrigins = [];
+
                 foreach ($cors['allow-origin'] as $allowOrigin => $class) {
                     $allowOrigins[] = new $class($allowOrigin);
                 }
@@ -43,6 +46,14 @@ final class MiddlewareServiceFactory
                     $cors['allow-credentials'],
                     $cors['max-age']
                 );
+            },
+            JaegerMiddleware::class => static function (ContainerInterface $container) {
+                $config = Config::getInstance();
+                $config->gen128bit();
+
+                $jaegerConfig = $container->get('jaeger');
+
+                return new JaegerMiddleware($config, $jaegerConfig['serverName'], $jaegerConfig['agentHost']);
             },
         ];
     }

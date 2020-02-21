@@ -7,6 +7,7 @@ namespace App;
 use App\Config\DevConfig;
 use App\Config\PhpunitConfig;
 use App\Config\ProdConfig;
+use App\Middleware\JaegerMiddleware;
 use App\ServiceFactory\ChubbyphpFrameworkServiceFactory;
 use App\ServiceFactory\MiddlewareServiceFactory;
 use App\ServiceFactory\RequestHandlerServiceFactory;
@@ -40,6 +41,7 @@ return static function (string $env) {
     ]))->get($env)))());
 
     return new Application([
+        new LazyMiddleware($container, JaegerMiddleware::class),
         new LazyMiddleware($container, ExceptionMiddleware::class),
         new LazyMiddleware($container, CorsMiddleware::class),
         new LazyMiddleware($container, RouterMiddleware::class),

@@ -49,6 +49,10 @@ class ProdConfig extends AbstractConfig
                 'cache.query' => ['type' => 'apcu'],
                 'proxies.dir' => $cacheDir.'/doctrine/proxies',
             ],
+            'jaeger' => [
+                'serverName' => 'petstore-php',
+                'agentHost' => getenv('JAEGER_AGENT_HOST'),
+            ],
             'monolog' => [
                 'name' => 'petstore',
                 'path' => $logDir.'/application.log',

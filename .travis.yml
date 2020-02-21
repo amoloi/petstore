@@ -11,6 +11,7 @@ env:
     - DATABASE_HOST=127.0.0.1
     - DATABASE_PORT=5432
     - DATABASE_NAME=petstore
+    - JAEGER_AGENT_HOST=127.0.0.1:6831
 
 matrix:
   include:
