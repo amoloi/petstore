@@ -15,9 +15,8 @@ use App\RequestHandler\Api\Crud\ListRequestHandler;
 use App\RequestHandler\Api\Crud\ReadRequestHandler;
 use App\RequestHandler\Api\Crud\UpdateRequestHandler;
 use App\RequestHandler\Api\PingRequestHandler;
-use App\RequestHandler\Api\Swagger\IndexRequestHandler as SwaggerIndexRequestHandler;
-use App\RequestHandler\Api\Swagger\YamlRequestHandler as SwaggerYamlRequestHandler;
-use App\RequestHandler\IndexRequestHandler;
+use App\RequestHandler\Api\Swagger\IndexRequestHandler;
+use App\RequestHandler\Api\Swagger\YamlRequestHandler;
 use App\ServiceFactory\MiddlewareServiceFactory;
 use App\ServiceFactory\RequestHandlerServiceFactory;
 use Chubbyphp\ApiHttp\Middleware\AcceptAndContentTypeMiddleware;
@@ -51,11 +50,10 @@ return static function (string $env) {
 
     $app
         ->stack(CorsMiddleware::class)
-        ->get('', IndexRequestHandler::class)
         ->group('/api', function () use ($app): void {
             $app
-                ->get('/swagger/index', SwaggerIndexRequestHandler::class)
-                ->get('/swagger/yml', SwaggerYamlRequestHandler::class)
+                ->get('/swagger/index', IndexRequestHandler::class)
+                ->get('/swagger/yaml', YamlRequestHandler::class)
                 ->get('/ping', [
                     AcceptAndContentTypeMiddleware::class,
                     PingRequestHandler::class,
