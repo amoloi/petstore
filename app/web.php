@@ -14,9 +14,8 @@ use App\RequestHandler\Api\Crud\ListRequestHandler;
 use App\RequestHandler\Api\Crud\ReadRequestHandler;
 use App\RequestHandler\Api\Crud\UpdateRequestHandler;
 use App\RequestHandler\Api\PingRequestHandler;
-use App\RequestHandler\Api\Swagger\IndexRequestHandler as SwaggerIndexRequestHandler;
-use App\RequestHandler\Api\Swagger\YamlRequestHandler as SwaggerYamlRequestHandler;
-use App\RequestHandler\IndexRequestHandler;
+use App\RequestHandler\Api\Swagger\IndexRequestHandler;
+use App\RequestHandler\Api\Swagger\YamlRequestHandler;
 use App\ServiceFactory\MiddlewareServiceFactory;
 use App\ServiceFactory\RequestHandlerServiceFactory;
 use App\ServiceFactory\SlimServiceFactory;
@@ -57,10 +56,9 @@ return static function (string $env) {
     $web->add(CorsMiddleware::class);
     $web->addErrorMiddleware($container->get('debug'), true, true);
 
-    $web->get('/', IndexRequestHandler::class)->setName('index');
     $web->group('/api', function (RouteCollectorProxy $group): void {
-        $group->get('/swagger/index', SwaggerIndexRequestHandler::class)->setName('swagger_index');
-        $group->get('/swagger/yml', SwaggerYamlRequestHandler::class)->setName('swagger_yml');
+        $group->get('/swagger/index', IndexRequestHandler::class)->setName('swagger_index');
+        $group->get('/swagger/yaml', YamlRequestHandler::class)->setName('swagger_yaml');
         $group->get('/ping', PingRequestHandler::class)->setName('ping')->add(AcceptAndContentTypeMiddleware::class);
         $group->group('/pets', function (RouteCollectorProxy $group): void {
             $group->get('', ListRequestHandler::class.Pet::class)->setName('pet_list');

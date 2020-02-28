@@ -17,9 +17,8 @@ use App\RequestHandler\Api\Crud\ListRequestHandler;
 use App\RequestHandler\Api\Crud\ReadRequestHandler;
 use App\RequestHandler\Api\Crud\UpdateRequestHandler;
 use App\RequestHandler\Api\PingRequestHandler;
-use App\RequestHandler\Api\Swagger\IndexRequestHandler as SwaggerIndexRequestHandler;
-use App\RequestHandler\Api\Swagger\YamlRequestHandler as SwaggerYamlRequestHandler;
-use App\RequestHandler\IndexRequestHandler;
+use App\RequestHandler\Api\Swagger\IndexRequestHandler;
+use App\RequestHandler\Api\Swagger\YamlRequestHandler;
 use App\ServiceFactory\RequestHandlerServiceFactory;
 use Chubbyphp\ApiHttp\Manager\RequestManagerInterface;
 use Chubbyphp\ApiHttp\Manager\ResponseManagerInterface;
@@ -31,7 +30,6 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
-use Slim\Interfaces\RouteParserInterface;
 
 /**
  * @covers \App\ServiceFactory\RequestHandlerServiceFactory
@@ -46,7 +44,7 @@ final class RequestHandlerServiceFactoryTest extends TestCase
     {
         $factories = (new RequestHandlerServiceFactory())();
 
-        self::assertCount(9, $factories);
+        self::assertCount(8, $factories);
     }
 
     public function testPetCreateRequestHandler(): void
@@ -201,66 +199,18 @@ final class RequestHandlerServiceFactoryTest extends TestCase
         );
     }
 
-    public function testSwaggerIndexRequestHandler(): void
-    {
-        /** @var ResponseFactoryInterface|MockObject $responseFactory */
-        $responseFactory = $this->getMockByCalls(ResponseFactoryInterface::class);
-
-        /** @var StreamFactoryInterface|MockObject $streamFactory */
-        $streamFactory = $this->getMockByCalls(StreamFactoryInterface::class);
-
-        /** @var ContainerInterface|MockObject $container */
-        $container = $this->getMockByCalls(ContainerInterface::class, [
-            Call::create('get')->with('api-http.response.factory')->willReturn($responseFactory),
-            Call::create('get')->with('api-http.stream.factory')->willReturn($streamFactory),
-        ]);
-
-        $factories = (new RequestHandlerServiceFactory())();
-
-        self::assertArrayHasKey(SwaggerIndexRequestHandler::class, $factories);
-
-        self::assertInstanceOf(
-            SwaggerIndexRequestHandler::class,
-            $factories[SwaggerIndexRequestHandler::class]($container)
-        );
-    }
-
-    public function testSwaggerYamlRequestHandler(): void
-    {
-        /** @var ResponseFactoryInterface|MockObject $responseFactory */
-        $responseFactory = $this->getMockByCalls(ResponseFactoryInterface::class);
-
-        /** @var StreamFactoryInterface|MockObject $streamFactory */
-        $streamFactory = $this->getMockByCalls(StreamFactoryInterface::class);
-
-        /** @var ContainerInterface|MockObject $container */
-        $container = $this->getMockByCalls(ContainerInterface::class, [
-            Call::create('get')->with('api-http.response.factory')->willReturn($responseFactory),
-            Call::create('get')->with('api-http.stream.factory')->willReturn($streamFactory),
-        ]);
-
-        $factories = (new RequestHandlerServiceFactory())();
-
-        self::assertArrayHasKey(SwaggerYamlRequestHandler::class, $factories);
-
-        self::assertInstanceOf(
-            SwaggerYamlRequestHandler::class,
-            $factories[SwaggerYamlRequestHandler::class]($container)
-        );
-    }
-
     public function testIndexRequestHandler(): void
     {
         /** @var ResponseFactoryInterface|MockObject $responseFactory */
         $responseFactory = $this->getMockByCalls(ResponseFactoryInterface::class);
 
-        /** @var RouteParserInterface|MockObject $router */
-        $router = $this->getMockByCalls(RouteParserInterface::class);
+        /** @var StreamFactoryInterface|MockObject $streamFactory */
+        $streamFactory = $this->getMockByCalls(StreamFactoryInterface::class);
 
         /** @var ContainerInterface|MockObject $container */
         $container = $this->getMockByCalls(ContainerInterface::class, [
             Call::create('get')->with('api-http.response.factory')->willReturn($responseFactory),
-            Call::create('get')->with(RouteParserInterface::class)->willReturn($router),
+            Call::create('get')->with('api-http.stream.factory')->willReturn($streamFactory),
         ]);
 
         $factories = (new RequestHandlerServiceFactory())();
@@ -270,6 +220,30 @@ final class RequestHandlerServiceFactoryTest extends TestCase
         self::assertInstanceOf(
             IndexRequestHandler::class,
             $factories[IndexRequestHandler::class]($container)
+        );
+    }
+
+    public function testYamlRequestHandler(): void
+    {
+        /** @var ResponseFactoryInterface|MockObject $responseFactory */
+        $responseFactory = $this->getMockByCalls(ResponseFactoryInterface::class);
+
+        /** @var StreamFactoryInterface|MockObject $streamFactory */
+        $streamFactory = $this->getMockByCalls(StreamFactoryInterface::class);
+
+        /** @var ContainerInterface|MockObject $container */
+        $container = $this->getMockByCalls(ContainerInterface::class, [
+            Call::create('get')->with('api-http.response.factory')->willReturn($responseFactory),
+            Call::create('get')->with('api-http.stream.factory')->willReturn($streamFactory),
+        ]);
+
+        $factories = (new RequestHandlerServiceFactory())();
+
+        self::assertArrayHasKey(YamlRequestHandler::class, $factories);
+
+        self::assertInstanceOf(
+            YamlRequestHandler::class,
+            $factories[YamlRequestHandler::class]($container)
         );
     }
 
