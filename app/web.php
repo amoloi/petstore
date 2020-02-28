@@ -14,9 +14,8 @@ use App\RequestHandler\Api\Crud\ListRequestHandler;
 use App\RequestHandler\Api\Crud\ReadRequestHandler;
 use App\RequestHandler\Api\Crud\UpdateRequestHandler;
 use App\RequestHandler\Api\PingRequestHandler;
-use App\RequestHandler\Api\Swagger\IndexRequestHandler as SwaggerIndexRequestHandler;
-use App\RequestHandler\Api\Swagger\YamlRequestHandler as SwaggerYamlRequestHandler;
-use App\RequestHandler\IndexRequestHandler;
+use App\RequestHandler\Api\Swagger\IndexRequestHandler;
+use App\RequestHandler\Api\Swagger\YamlRequestHandler;
 use App\ServiceFactory\MezzioServiceFactory;
 use App\ServiceFactory\MiddlewareServiceFactory;
 use App\ServiceFactory\RequestHandlerServiceFactory;
@@ -67,9 +66,8 @@ return static function (string $env) {
     $web->pipe(DispatchMiddleware::class);
     $web->pipe(NotFoundHandler::class);
 
-    $web->get('/', IndexRequestHandler::class, 'index');
-    $web->get('/api/swagger/index', SwaggerIndexRequestHandler::class, 'swagger_index');
-    $web->get('/api/swagger/yml', SwaggerYamlRequestHandler::class, 'swagger_yml');
+    $web->get('/api/swagger/index', IndexRequestHandler::class, 'swagger_index');
+    $web->get('/api/swagger/yaml', YamlRequestHandler::class, 'swagger_yaml');
     $web->get('/api/ping', [AcceptAndContentTypeMiddleware::class, PingRequestHandler::class], 'ping');
     $web->get('/api/pets', [AcceptAndContentTypeMiddleware::class, ListRequestHandler::class.Pet::class], 'pet_list');
     $web->post(
