@@ -20,6 +20,7 @@ use App\ServiceFactory\MezzioServiceFactory;
 use App\ServiceFactory\MiddlewareServiceFactory;
 use App\ServiceFactory\RequestHandlerServiceFactory;
 use Chubbyphp\ApiHttp\Middleware\AcceptAndContentTypeMiddleware;
+use Chubbyphp\ApiHttp\Middleware\ApiExceptionMiddleware;
 use Chubbyphp\Config\ConfigProvider;
 use Chubbyphp\Config\ServiceFactory\ConfigServiceFactory;
 use Chubbyphp\Container\Container;
@@ -68,28 +69,35 @@ return static function (string $env) {
 
     $web->get('/api/swagger/index', IndexRequestHandler::class, 'swagger_index');
     $web->get('/api/swagger/yaml', YamlRequestHandler::class, 'swagger_yaml');
-    $web->get('/api/ping', [AcceptAndContentTypeMiddleware::class, PingRequestHandler::class], 'ping');
-    $web->get('/api/pets', [AcceptAndContentTypeMiddleware::class, ListRequestHandler::class.Pet::class], 'pet_list');
-    $web->post(
-        '/api/pets',
-        [AcceptAndContentTypeMiddleware::class, CreateRequestHandler::class.Pet::class],
-        'pet_create'
-    );
-    $web->get(
-        '/api/pets/{id}',
-        [AcceptAndContentTypeMiddleware::class, ReadRequestHandler::class.Pet::class],
-        'pet_read'
-    );
-    $web->put(
-        '/api/pets/{id}',
-        [AcceptAndContentTypeMiddleware::class, UpdateRequestHandler::class.Pet::class],
-        'pet_update'
-    );
-    $web->delete(
-        '/api/pets/{id}',
-        [AcceptAndContentTypeMiddleware::class, DeleteRequestHandler::class.Pet::class],
-        'pet_delete'
-    );
+    $web->get('/api/ping', [
+        AcceptAndContentTypeMiddleware::class,
+        ApiExceptionMiddleware::class,
+        PingRequestHandler::class,
+    ], 'ping');
+    $web->get('/api/pets', [
+        AcceptAndContentTypeMiddleware::class,
+        ListRequestHandler::class.Pet::class,
+    ], 'pet_list');
+    $web->post('/api/pets', [
+        AcceptAndContentTypeMiddleware::class,
+        ApiExceptionMiddleware::class,
+        CreateRequestHandler::class.Pet::class,
+    ], 'pet_create');
+    $web->get('/api/pets/{id}', [
+        AcceptAndContentTypeMiddleware::class,
+        ApiExceptionMiddleware::class,
+        ReadRequestHandler::class.Pet::class,
+    ], 'pet_read');
+    $web->put('/api/pets/{id}', [
+        AcceptAndContentTypeMiddleware::class,
+        ApiExceptionMiddleware::class,
+        UpdateRequestHandler::class.Pet::class,
+    ], 'pet_update');
+    $web->delete('/api/pets/{id}', [
+        AcceptAndContentTypeMiddleware::class,
+        ApiExceptionMiddleware::class,
+        DeleteRequestHandler::class.Pet::class,
+    ], 'pet_delete');
 
     return $web;
 };
