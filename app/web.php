@@ -20,6 +20,7 @@ use App\RequestHandler\Api\Swagger\YamlRequestHandler;
 use App\ServiceFactory\MiddlewareServiceFactory;
 use App\ServiceFactory\RequestHandlerServiceFactory;
 use Chubbyphp\ApiHttp\Middleware\AcceptAndContentTypeMiddleware;
+use Chubbyphp\ApiHttp\Middleware\ApiExceptionMiddleware;
 use Chubbyphp\Config\ConfigProvider;
 use Chubbyphp\Config\ServiceFactory\ConfigServiceFactory;
 use Chubbyphp\Container\Container;
@@ -56,11 +57,13 @@ return static function (string $env) {
                 ->get('/swagger/yaml', YamlRequestHandler::class)
                 ->get('/ping', [
                     AcceptAndContentTypeMiddleware::class,
+                    ApiExceptionMiddleware::class,
                     PingRequestHandler::class,
                 ])
                 ->group('/pets', function () use ($app): void {
                     $app
                         ->stack(AcceptAndContentTypeMiddleware::class)
+                        ->stack(ApiExceptionMiddleware::class)
                         ->get('', ListRequestHandler::class.Pet::class)
                         ->post('', CreateRequestHandler::class.Pet::class)
                         ->get('/{id}', ReadRequestHandler::class.Pet::class)
