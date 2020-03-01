@@ -10,7 +10,7 @@ A simple skeleton to build api's based on the [mezzio][1].
 ## Requirements
 
  * php: ^7.2
- * [chubbyphp/chubbyphp-api-http][3]: ^3.3.1
+ * [chubbyphp/chubbyphp-api-http][3]: ^3.4
  * [chubbyphp/chubbyphp-config][4]: ^2.1
  * [chubbyphp/chubbyphp-container][5]: ^1.0
  * [chubbyphp/chubbyphp-cors][6]: ^1.1
@@ -18,7 +18,7 @@ A simple skeleton to build api's based on the [mezzio][1].
  * [chubbyphp/chubbyphp-doctrine-db-service-provider][8]: ^1.6
  * [chubbyphp/chubbyphp-negotiation][9]: ^1.5.1
  * [chubbyphp/chubbyphp-serialization][10]: ^2.12.2
- * [chubbyphp/chubbyphp-validation][11]: ^3.7
+ * [chubbyphp/chubbyphp-validation][11]: ^3.9
  * [doctrine/orm][12]: ^2.7
  * [mezzio/mezzio-fastroute][13]: ^3.0.3
  * [mezzio/mezzio][14]: ^3.2.1
