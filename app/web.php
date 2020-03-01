@@ -20,6 +20,7 @@ use App\ServiceFactory\MiddlewareServiceFactory;
 use App\ServiceFactory\RequestHandlerServiceFactory;
 use App\ServiceFactory\SlimServiceFactory;
 use Chubbyphp\ApiHttp\Middleware\AcceptAndContentTypeMiddleware;
+use Chubbyphp\ApiHttp\Middleware\ApiExceptionMiddleware;
 use Chubbyphp\Config\ConfigProvider;
 use Chubbyphp\Config\ServiceFactory\ConfigServiceFactory;
 use Chubbyphp\Container\Container;
@@ -59,14 +60,17 @@ return static function (string $env) {
     $web->group('/api', function (RouteCollectorProxy $group): void {
         $group->get('/swagger/index', IndexRequestHandler::class)->setName('swagger_index');
         $group->get('/swagger/yaml', YamlRequestHandler::class)->setName('swagger_yaml');
-        $group->get('/ping', PingRequestHandler::class)->setName('ping')->add(AcceptAndContentTypeMiddleware::class);
+        $group->get('/ping', PingRequestHandler::class)->setName('ping')
+            ->add(ApiExceptionMiddleware::class)
+            ->add(AcceptAndContentTypeMiddleware::class)
+        ;
         $group->group('/pets', function (RouteCollectorProxy $group): void {
             $group->get('', ListRequestHandler::class.Pet::class)->setName('pet_list');
             $group->post('', CreateRequestHandler::class.Pet::class)->setName('pet_create');
             $group->get('/{id}', ReadRequestHandler::class.Pet::class)->setName('pet_read');
             $group->put('/{id}', UpdateRequestHandler::class.Pet::class)->setName('pet_update');
             $group->delete('/{id}', DeleteRequestHandler::class.Pet::class)->setName('pet_delete');
-        })->add(AcceptAndContentTypeMiddleware::class);
+        })->add(ApiExceptionMiddleware::class)->add(AcceptAndContentTypeMiddleware::class);
     });
 
     return $web;
