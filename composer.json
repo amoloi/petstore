@@ -17,7 +17,7 @@
         "doctrine/orm": "^2.7",
         "monolog/monolog": "^2.0.2",
         "ocramius/proxy-manager": "^2.2.3",
-        "ramsey/uuid": "^3.9.2",
+        "ramsey/uuid": "^4.0",
         "slim/psr7": "^1.0",
         "slim/slim": "^4.4",
         "swagger-api/swagger-ui": "^3.24.3",
