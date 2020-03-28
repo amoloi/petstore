@@ -14,7 +14,7 @@ A simple skeleton to build api's based on the [mezzio][1].
  * [chubbyphp/chubbyphp-config][4]: ^2.1
  * [chubbyphp/chubbyphp-container][5]: ^1.0
  * [chubbyphp/chubbyphp-cors][6]: ^1.1
- * [chubbyphp/chubbyphp-deserialization][7]: ^2.15.2
+ * [chubbyphp/chubbyphp-deserialization][7]: ^2.16
  * [chubbyphp/chubbyphp-doctrine-db-service-provider][8]: ^1.6
  * [chubbyphp/chubbyphp-negotiation][9]: ^1.5.1
  * [chubbyphp/chubbyphp-serialization][10]: ^2.12.2
