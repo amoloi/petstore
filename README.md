@@ -16,18 +16,18 @@ A simple skeleton to build api's based on the [peakphp][1].
  * [chubbyphp/chubbyphp-cors][6]: ^1.1.1
  * [chubbyphp/chubbyphp-deserialization][7]: ^2.16
  * [chubbyphp/chubbyphp-doctrine-db-service-provider][8]: ^1.6.1
- * [chubbyphp/chubbyphp-negotiation][9]: ^1.5.2
+ * [chubbyphp/chubbyphp-negotiation][9]: ^1.5.3
  * [chubbyphp/chubbyphp-serialization][10]: ^2.12.4
  * [chubbyphp/chubbyphp-validation][11]: ^3.9
- * [doctrine/orm][12]: ^2.7
+ * [doctrine/orm][12]: ^2.7.2
  * [monolog/monolog][13]: ^2.0.2
  * [nikic/fast-route][14]: ^1.3
  * [ocramius/proxy-manager][15]: ^2.2.3
  * [peak/bedrock][16]: ^4.2.2
- * [ramsey/uuid][17]: ^3.9.2
+ * [ramsey/uuid][17]: ^4.0.1
  * [slim/psr7][18]: ^1.0
  * [swagger-api/swagger-ui][19]: ^3.25
- * [symfony/console][20]: ^4.4.4|^5.0.4
+ * [symfony/console][20]: ^4.4.7|^5.0.7
 
 ## Environment
 
