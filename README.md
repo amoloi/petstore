@@ -11,23 +11,23 @@ A simple skeleton to build api's based on the [mezzio][1].
 
  * php: ^7.2
  * [chubbyphp/chubbyphp-api-http][3]: ^3.4
- * [chubbyphp/chubbyphp-config][4]: ^2.1
- * [chubbyphp/chubbyphp-container][5]: ^1.0
- * [chubbyphp/chubbyphp-cors][6]: ^1.1
+ * [chubbyphp/chubbyphp-config][4]: ^2.1.1
+ * [chubbyphp/chubbyphp-container][5]: ^1.0.3
+ * [chubbyphp/chubbyphp-cors][6]: ^1.1.1
  * [chubbyphp/chubbyphp-deserialization][7]: ^2.16
- * [chubbyphp/chubbyphp-doctrine-db-service-provider][8]: ^1.6
- * [chubbyphp/chubbyphp-negotiation][9]: ^1.5.1
- * [chubbyphp/chubbyphp-serialization][10]: ^2.12.2
+ * [chubbyphp/chubbyphp-doctrine-db-service-provider][8]: ^1.6.1
+ * [chubbyphp/chubbyphp-negotiation][9]: ^1.5.3
+ * [chubbyphp/chubbyphp-serialization][10]: ^2.12.4
  * [chubbyphp/chubbyphp-validation][11]: ^3.9
- * [doctrine/orm][12]: ^2.7
+ * [doctrine/orm][12]: ^2.7.2
  * [mezzio/mezzio-fastroute][13]: ^3.0.3
  * [mezzio/mezzio][14]: ^3.2.1
  * [monolog/monolog"][15]: ^2.0.2
  * [ocramius/proxy-manager][16]: ^2.2.3
- * [ramsey/uuid][17]: ^3.9.2
+ * [ramsey/uuid][17]: ^4.0.1
  * [slim/psr7][18]: ^1.0
- * [swagger-api/swagger-ui][19]: ^3.24.3
- * [symfony/console][20]: ^4.4.2|^5.0.2
+ * [swagger-api/swagger-ui][19]: ^3.25
+ * [symfony/console][20]: ^4.4.7|^5.0.7
 
 ## Environment
 
