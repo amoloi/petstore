@@ -51,7 +51,7 @@ return static function (string $env) {
 
     $app
         ->stack(CorsMiddleware::class)
-        ->group('/api', function () use ($app): void {
+        ->group('/api', static function () use ($app): void {
             $app
                 ->get('/swagger/index', IndexRequestHandler::class)
                 ->get('/swagger/yaml', YamlRequestHandler::class)
@@ -60,7 +60,7 @@ return static function (string $env) {
                     ApiExceptionMiddleware::class,
                     PingRequestHandler::class,
                 ])
-                ->group('/pets', function () use ($app): void {
+                ->group('/pets', static function () use ($app): void {
                     $app
                         ->stack(AcceptAndContentTypeMiddleware::class)
                         ->stack(ApiExceptionMiddleware::class)

@@ -25,6 +25,21 @@ final class PetCollectionMappingTest extends CollectionMappingTest
         return 'petCollection';
     }
 
+    protected function getListPath(): string
+    {
+        return '/api/pets';
+    }
+
+    protected function getCreatePath(): string
+    {
+        return '/api/pets';
+    }
+
+    protected function getCollectionPath(): string
+    {
+        return '/api/pets';
+    }
+
     protected function getCollectionMapping(): AbstractCollectionMapping
     {
         return new PetCollectionMapping();

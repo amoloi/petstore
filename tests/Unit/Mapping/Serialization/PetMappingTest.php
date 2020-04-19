@@ -45,6 +45,26 @@ final class PetMappingTest extends ModelMappingTest
         return 'pet';
     }
 
+    protected function getReadPath(): string
+    {
+        return '/api/pets/%s';
+    }
+
+    protected function getUpdatePath(): string
+    {
+        return '/api/pets/%s';
+    }
+
+    protected function getDeletePath(): string
+    {
+        return '/api/pets/%s';
+    }
+
+    protected function getModelPath(): string
+    {
+        return '/api/pets/%s';
+    }
+
     protected function getModelMapping(): AbstractModelMapping
     {
         return new PetMapping();

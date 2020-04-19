@@ -6,8 +6,12 @@ namespace App\Tests\Unit\Mapping\Serialization;
 
 use App\Mapping\Serialization\AbstractModelMapping;
 use App\Model\ModelInterface;
+use Chubbyphp\Mock\Call;
 use Chubbyphp\Mock\MockByCallsTrait;
 use Chubbyphp\Serialization\Mapping\NormalizationFieldMappingBuilder;
+use Chubbyphp\Serialization\Mapping\NormalizationLinkMappingInterface;
+use Chubbyphp\Serialization\Normalizer\NormalizerContextInterface;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -61,7 +65,52 @@ class ModelMappingTest extends TestCase
 
         $linkMappings = $mapping->getNormalizationLinkMappings('/');
 
-        self::assertEquals([], $linkMappings);
+        self::assertCount(3, $linkMappings);
+
+        self::assertInstanceOf(NormalizationLinkMappingInterface::class, $linkMappings[0]);
+        self::assertInstanceOf(NormalizationLinkMappingInterface::class, $linkMappings[1]);
+        self::assertInstanceOf(NormalizationLinkMappingInterface::class, $linkMappings[2]);
+
+        /** @var ModelInterface|MockObject $model */
+        $model = $this->getMockByCalls(ModelInterface::class, [
+            Call::create('getId')->with()->willReturn('f183c7ff-7683-451e-807c-b916d9b5cf86'),
+            Call::create('getId')->with()->willReturn('f183c7ff-7683-451e-807c-b916d9b5cf86'),
+            Call::create('getId')->with()->willReturn('f183c7ff-7683-451e-807c-b916d9b5cf86'),
+        ]);
+
+        /** @var NormalizerContextInterface|MockObject $context */
+        $context = $this->getMockByCalls(NormalizerContextInterface::class);
+
+        $read = $linkMappings[0]->getLinkNormalizer()->normalizeLink('/', $model, $context);
+        $update = $linkMappings[1]->getLinkNormalizer()->normalizeLink('/', $model, $context);
+        $delete = $linkMappings[2]->getLinkNormalizer()->normalizeLink('/', $model, $context);
+
+        self::assertSame([
+            'href' => sprintf($this->getModelPath(), 'f183c7ff-7683-451e-807c-b916d9b5cf86'),
+            'templated' => false,
+            'rel' => [],
+            'attributes' => [
+                'method' => 'GET',
+            ],
+        ], $read);
+
+        self::assertSame([
+            'href' => sprintf($this->getModelPath(), 'f183c7ff-7683-451e-807c-b916d9b5cf86'),
+            'templated' => false,
+            'rel' => [],
+            'attributes' => [
+                'method' => 'PUT',
+            ],
+        ], $update);
+
+        self::assertSame([
+            'href' => sprintf($this->getModelPath(), 'f183c7ff-7683-451e-807c-b916d9b5cf86'),
+            'templated' => false,
+            'rel' => [],
+            'attributes' => [
+                'method' => 'DELETE',
+            ],
+        ], $delete);
     }
 
     protected function getClass(): string
@@ -74,9 +123,29 @@ class ModelMappingTest extends TestCase
         return 'model';
     }
 
+    protected function getReadPath(): string
+    {
+        return '/api/collection/%s';
+    }
+
+    protected function getUpdatePath(): string
+    {
+        return '/api/collection/%s';
+    }
+
+    protected function getDeletePath(): string
+    {
+        return '/api/collection/%s';
+    }
+
+    protected function getModelPath(): string
+    {
+        return '/api/collection/%s';
+    }
+
     protected function getModelMapping(): AbstractModelMapping
     {
-        return new class($this->getClass(), $this->getNormalizationType()) extends AbstractModelMapping {
+        return new class($this->getClass(), $this->getNormalizationType(), $this->getReadPath(), $this->getUpdatePath(), $this->getDeletePath()) extends AbstractModelMapping {
             /**
              * @var string
              */
@@ -87,12 +156,33 @@ class ModelMappingTest extends TestCase
              */
             private $normalizationType;
 
+            /**
+             * @var string
+             */
+            private $readPath;
+
+            /**
+             * @var string
+             */
+            private $updatePath;
+
+            /**
+             * @var string
+             */
+            private $deletePath;
+
             public function __construct(
                 string $class,
-                string $normalizationType
+                string $normalizationType,
+                string $readPath,
+                string $updatePath,
+                string $deletePath
             ) {
                 $this->class = $class;
                 $this->normalizationType = $normalizationType;
+                $this->readPath = $readPath;
+                $this->updatePath = $updatePath;
+                $this->deletePath = $deletePath;
             }
 
             public function getClass(): string
@@ -103,6 +193,21 @@ class ModelMappingTest extends TestCase
             public function getNormalizationType(): string
             {
                 return $this->normalizationType;
+            }
+
+            protected function getReadPath(): string
+            {
+                return $this->readPath;
+            }
+
+            protected function getUpdatePath(): string
+            {
+                return $this->updatePath;
+            }
+
+            protected function getDeletePath(): string
+            {
+                return $this->deletePath;
             }
         };
     }

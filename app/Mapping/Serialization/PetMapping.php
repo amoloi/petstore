@@ -32,4 +32,19 @@ final class PetMapping extends AbstractModelMapping
 
         return $normalizationFieldMappings;
     }
+
+    protected function getReadPath(): string
+    {
+        return '/api/pets/%s';
+    }
+
+    protected function getUpdatePath(): string
+    {
+        return '/api/pets/%s';
+    }
+
+    protected function getDeletePath(): string
+    {
+        return '/api/pets/%s';
+    }
 }

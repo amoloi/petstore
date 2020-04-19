@@ -229,7 +229,9 @@ final class PetCrudRequestHandlerTest extends AbstractIntegrationTest
         self::assertArrayHasKey('count', $petCollection);
         self::assertArrayHasKey('_embedded', $petCollection);
         self::assertArrayHasKey('items', $petCollection['_embedded']);
-
+        self::assertArrayHasKey('_links', $petCollection);
+        self::assertArrayHasKey('list', $petCollection['_links']);
+        self::assertArrayHasKey('create', $petCollection['_links']);
         self::assertArrayHasKey('_type', $petCollection);
 
         self::assertSame(0, $petCollection['offset']);
@@ -253,6 +255,22 @@ final class PetCrudRequestHandlerTest extends AbstractIntegrationTest
 
         self::assertTrue($found);
 
+        self::assertSame([
+            'href' => '/api/pets?sort%5Bname%5D=desc&offset=0&limit=20',
+            'templated' => false,
+            'rel' => [],
+            'attributes' => [
+                'method' => 'GET',
+            ],
+        ], $petCollection['_links']['list']);
+        self::assertSame([
+            'href' => '/api/pets',
+            'templated' => false,
+            'rel' => [],
+            'attributes' => [
+                'method' => 'POST',
+            ],
+        ], $petCollection['_links']['create']);
         self::assertSame('petCollection', $petCollection['_type']);
     }
 
@@ -620,6 +638,10 @@ final class PetCrudRequestHandlerTest extends AbstractIntegrationTest
         self::assertArrayHasKey('name', $pet);
         self::assertArrayHasKey('tag', $pet);
         self::assertArrayHasKey('vaccinations', $pet);
+        self::assertArrayHasKey('_links', $pet);
+        self::assertArrayHasKey('read', $pet['_links']);
+        self::assertArrayHasKey('update', $pet['_links']);
+        self::assertArrayHasKey('delete', $pet['_links']);
         self::assertArrayHasKey('_type', $pet);
 
         self::assertRegExp(self::UUID_PATTERN, $pet['id']);
@@ -637,6 +659,30 @@ final class PetCrudRequestHandlerTest extends AbstractIntegrationTest
             self::assertVaccination($pet['vaccinations'][$i], $expectedVaccination);
         }
         self::assertSame(count($expectedPet['vaccinations']), count($pet['vaccinations']));
+        self::assertSame([
+            'href' => sprintf('/api/pets/%s', $pet['id']),
+            'templated' => false,
+            'rel' => [],
+            'attributes' => [
+                'method' => 'GET',
+            ],
+        ], $pet['_links']['read']);
+        self::assertSame([
+            'href' => sprintf('/api/pets/%s', $pet['id']),
+            'templated' => false,
+            'rel' => [],
+            'attributes' => [
+                'method' => 'PUT',
+            ],
+        ], $pet['_links']['update']);
+        self::assertSame([
+            'href' => sprintf('/api/pets/%s', $pet['id']),
+            'templated' => false,
+            'rel' => [],
+            'attributes' => [
+                'method' => 'DELETE',
+            ],
+        ], $pet['_links']['delete']);
         self::assertSame('pet', $pet['_type']);
     }
 

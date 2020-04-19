@@ -17,4 +17,14 @@ final class PetCollectionMapping extends AbstractCollectionMapping
     {
         return 'petCollection';
     }
+
+    protected function getListPath(): string
+    {
+        return '/api/pets';
+    }
+
+    protected function getCreatePath(): string
+    {
+        return '/api/pets';
+    }
 }
