@@ -17,7 +17,7 @@ A simple skeleton to build api's based on the [mezzio][1].
  * [chubbyphp/chubbyphp-deserialization][7]: ^2.17
  * [chubbyphp/chubbyphp-doctrine-db-service-provider][8]: ^1.6.1
  * [chubbyphp/chubbyphp-negotiation][9]: ^1.5.3
- * [chubbyphp/chubbyphp-serialization][10]: ^2.12.4
+ * [chubbyphp/chubbyphp-serialization][10]: ^2.13.1
  * [chubbyphp/chubbyphp-validation][11]: ^3.9
  * [doctrine/orm][12]: ^2.7.2
  * [mezzio/mezzio-fastroute][13]: ^3.0.3
