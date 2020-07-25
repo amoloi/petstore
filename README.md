@@ -15,7 +15,7 @@ A simple skeleton to build api's based on the [peakphp][1].
  * [chubbyphp/chubbyphp-container][5]: ^1.0.3
  * [chubbyphp/chubbyphp-cors][6]: ^1.1.1
  * [chubbyphp/chubbyphp-deserialization][7]: ^2.17
- * [chubbyphp/chubbyphp-doctrine-db-service-provider][8]: ^1.6.1
+ * [chubbyphp/chubbyphp-doctrine-db-service-provider][8]: ^2.0
  * [chubbyphp/chubbyphp-negotiation][9]: ^1.5.3
  * [chubbyphp/chubbyphp-serialization][10]: ^2.13.1
  * [chubbyphp/chubbyphp-validation][11]: ^3.9
